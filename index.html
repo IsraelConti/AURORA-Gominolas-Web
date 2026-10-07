@@ -1,1 +1,1000 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AURORA CORP · Proyecto Gominolas</title><style>body{font-family:Arial,sans-serif;margin:0;background:#f5f7fa;color:#172033}header{padding:32px;background:#172033;color:#fff}main{max-width:1100px;margin:auto;padding:28px}.card{background:#fff;border-radius:14px;padding:22px;margin:16px 0;box-shadow:0 4px 18px #0001}.tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#e8eef8;margin:4px}h1{margin:0 0 8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}</style></head><body><header><h1>AURORA CORP · Proyecto Gominolas</h1><div>Guía técnica y operativa de la línea</div></header><main><div class="card"><h2>Proyecto integral</h2><p>Aplicación web del proyecto Gominolas. Estructura preparada para incorporar los equipos, proceso, documentación e imágenes del proyecto.</p><span class="tag">Preparación</span><span class="tag">Reactores</span><span class="tag">Vacío</span><span class="tag">Formado</span><span class="tag">PLC/HMI</span><span class="tag">CIP</span></div><div class="grid"><div class="card"><h3>Proceso</h3><p>Preparación → reactores → vacío → pulmón/bombeo → formado.</p></div><div class="card"><h3>Equipos</h3><p>T-01/T-02 · R-101/R-201/R-202 · TK-301 · B-301.</p></div><div class="card"><h3>Control</h3><p>Instrumentación PT/PIC/PCV, automatización PLC/HMI y seguridad.</p></div><div class="card"><h3>Mantenimiento</h3><p>CIP, mantenimiento, documentación y seguimiento del proyecto.</p></div></div></main></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AURORA CORP · Guía Proyecto Gominolas</title>
+<style>
+:root{--bg:#0b141d;--panel:#122330;--panel2:#0f1d28;--line:#2a4a60;--text:#eef7fb;--muted:#9eb4c2;--blue:#34ace5;--blue2:#78d8ff;--green:#48c78e;--amber:#f0b84b;--red:#e56c5a}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#09121a,#10202c);color:var(--text);font-family:Segoe UI,Arial,sans-serif}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:13px 18px;background:#09131ccc;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+button{cursor:pointer} #back{display:none;background:#142737;color:white;border:1px solid var(--line);padding:9px 12px;border-radius:9px}
+.brand{font-weight:900;letter-spacing:.4px} .brand b{color:var(--blue2)} .crumb{flex:1;color:var(--muted);font-size:13px}
+main{max-width:1280px;margin:auto;padding:22px} .hero,.box{background:linear-gradient(180deg,#142735,#10202c);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
+h1{margin:5px 0 8px} h2{margin:0 0 12px} h3{margin:0 0 8px} p{color:var(--muted);line-height:1.5}
+.tag{display:inline-block;padding:5px 9px;border:1px solid #2a5a78;background:#15364b;border-radius:999px;color:#a9e2ff;font-size:11px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px} .card{background:#142735;border:1px solid #2c4c62;border-radius:14px;padding:16px;cursor:pointer;min-height:125px;transition:.18s}
+.card:hover{transform:translateY(-2px);border-color:#5a8fae} .zone{font-size:12px;color:var(--blue2);font-weight:800} .title{font-size:18px;font-weight:800;margin:8px 0} .small{font-size:12px;color:var(--muted)} .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#6e7c86;margin-right:6px} .active{background:var(--amber)} .done{background:var(--green)}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:13px} .hidden{display:none}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap} .step{background:#173249;border:1px solid #2e607f;border-radius:9px;padding:9px 11px;font-size:13px} .arrow{color:var(--blue2);font-weight:900}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px} .fact{background:#0f1c27;border:1px solid #27475c;border-radius:11px;padding:13px} .fact b{display:block;color:#dff4ff;margin-bottom:5px} .fact span{color:var(--muted);font-size:13px;line-height:1.45}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px} .primary{border:0;background:var(--blue);color:#062030;font-weight:900;padding:10px 13px;border-radius:9px} .secondary{border:1px solid var(--line);background:#142737;color:#fff;padding:10px 13px;border-radius:9px}
+table{width:100%;border-collapse:collapse;font-size:13px} th,td{padding:9px;border-bottom:1px solid #203b4e;text-align:left;vertical-align:top} th{color:#bfeaff;background:#102536;position:sticky;top:54px} td{color:#d9e7ee} .tablewrap{overflow:auto;max-height:520px;border:1px solid #29485d;border-radius:11px}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px} .doc{background:#0e1a24;border:1px solid #29495e;border-radius:12px;overflow:hidden} .doc img{width:100%;height:150px;object-fit:cover;object-position:top;background:#15222a} .doc .pad{padding:12px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0} .kpi{background:#0d1b25;border:1px solid #244459;border-radius:11px;padding:12px} .kpi b{font-size:22px;color:#bfeaff;display:block} .kpi span{font-size:12px;color:var(--muted)}
+.notice{border-left:4px solid var(--amber);background:#181f24;padding:12px 14px;border-radius:8px;color:#cbd9e0;font-size:13px}
+@media(max-width:760px){.modes,.kpis{grid-template-columns:1fr}}
+
+.docxgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.docxcard{background:#0d1b25;border:1px solid #29495e;border-radius:13px;overflow:hidden}
+.docxcard img{width:100%;height:185px;object-fit:cover;object-position:top;background:#e7edf0}
+.docbody{padding:13px}.docbody h3{font-size:16px;margin:8px 0}.docbody p{font-size:12.5px;color:var(--muted);line-height:1.45}
+.docmeta{font-size:11px;color:#7fa1b4;border-top:1px solid #203b4e;padding-top:8px}
+.docbadges{display:flex;gap:6px;flex-wrap:wrap}.badge{font-size:10px;font-weight:800;padding:4px 7px;border-radius:999px;border:1px solid #31576f;color:#afd7eb;background:#122b3c}
+.badge.ok{border-color:#2e765b;color:#9ee4c4;background:#123026}.badge.warn{border-color:#786226;color:#f2d27c;background:#302815}.badge.info{border-color:#35657d;color:#a8dcf3;background:#143044}
+.source-note{font-size:12px;color:#b8c9d2;background:#101e29;border-left:4px solid #38a9df;padding:10px 12px;border-radius:8px;margin-bottom:14px}
+
+
+.pdfviewerbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0 16px}
+.pdfgallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px}
+.pdfpage{background:#0b1822;border:1px solid #2a4c62;border-radius:12px;overflow:hidden}
+.pdfpagetitle{padding:8px 11px;font-size:12px;font-weight:800;color:#bfeaff;border-bottom:1px solid #234154}
+.pdfpage img{width:100%;display:block;cursor:zoom-in;background:white}
+#imgModal{display:none;position:fixed;z-index:9999;inset:0;background:rgba(0,0,0,.92);padding:20px;overflow:auto}
+#imgModal img{display:block;max-width:95%;margin:0 auto;background:white;box-shadow:0 10px 40px #000}
+#imgModal .closeModal{position:fixed;right:20px;top:18px;background:#fff;color:#111;border:0;border-radius:999px;width:42px;height:42px;font-size:22px;font-weight:900}
+@media(max-width:760px){.pdfgallery{grid-template-columns:1fr}}
+
+
+.line-overview{margin:16px 0 18px;background:#0c1b26;border:1px solid #2a4a60;border-radius:16px;padding:14px;overflow:hidden}
+.line-overview h2{margin:0 0 6px}.line-overview .lead{margin:0 0 12px;font-size:13px}
+.line-image-wrap{position:relative;border-radius:13px;overflow:hidden;border:1px solid #31576f;background:#07131c}
+.line-image-wrap img{width:100%;display:block;opacity:.96}
+.hotspot{position:absolute;width:42px;height:42px;border-radius:50%;border:3px solid #fff;background:#0b83c7;color:#fff;font-size:20px;font-weight:900;box-shadow:0 4px 14px #000a;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);cursor:pointer;transition:.15s}
+.hotspot:hover{transform:translate(-50%,-50%) scale(1.14);background:#31b8f2}
+.zone-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+.zone-key{border:1px solid #2b5269;background:#102534;border-radius:10px;padding:9px 10px;color:#eaf8ff;cursor:pointer;text-align:left;min-height:58px}
+.zone-key:hover{border-color:#67cfff;background:#153247}.zone-key b{display:inline-flex;width:25px;height:25px;border-radius:50%;align-items:center;justify-content:center;background:#168fc9;margin-right:7px}.zone-key span{font-size:12px;color:#b7cbd6}
+@media(max-width:800px){.zone-nav{grid-template-columns:repeat(2,1fr)}.hotspot{width:34px;height:34px;font-size:16px}}
+
+
+/* v0.7 — navegación jerárquica limpia */
+.zone0-hier-map{margin:22px 0 0;background:#0b1d27;border:1px solid #28566b;border-radius:18px;padding:18px}
+.zone0-hier-title{font-size:13px;font-weight:800;letter-spacing:.08em;color:#75d7ff;margin-bottom:10px}
+.zone0-map-stage{position:relative;min-height:390px;border-radius:14px;overflow:hidden;background:
+linear-gradient(180deg,rgba(10,30,42,.18),rgba(4,18,26,.58)),
+url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420"><rect width="100%" height="100%" fill="%23dfe7eb"/><g stroke="%2393a5ad" stroke-width="3" fill="%23bcc9cf"><rect x="70" y="90" width="150" height="220" rx="18"/><rect x="265" y="120" width="135" height="190" rx="18"/><rect x="455" y="145" width="150" height="165" rx="18"/><rect x="675" y="95" width="165" height="215" rx="18"/><rect x="915" y="125" width="170" height="185" rx="18"/></g><g stroke="%23667b86" stroke-width="10" fill="none"><path d="M220 230H265M400 230H455M605 230H675M840 230H915"/></g></svg>') center/cover no-repeat}
+.zpin{position:absolute;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0d9fd8;color:white;border:4px solid white;font-size:21px;font-weight:900;box-shadow:0 5px 18px #0008;cursor:pointer;transition:.15s;z-index:3}
+.zpin:hover{transform:scale(1.12);background:#31c5ff}
+.zpin[data-i="0"]{left:10%;top:48%}.zpin[data-i="1"]{left:28%;top:43%}.zpin[data-i="2"]{left:46%;top:49%}.zpin[data-i="3"]{left:66%;top:42%}.zpin[data-i="4"]{left:84%;top:48%}
+.zone0-legend{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+.zone0-legend div{padding:9px 8px;border:1px solid #244a5d;border-radius:10px;background:#0d2430;color:#bdd4df;font-size:12px;text-align:center}
+.zone0-legend b{color:#65d3ff;margin-right:4px}
+.zone0-alts{display:none!important}
+.subdetail{display:none;margin-top:16px;padding:20px;border:1px solid #2b5d73;border-radius:14px;background:#102733}
+.subdetail.active{display:block}
+.subdetail h3{margin:0 0 8px;color:white}
+.subdetail p{color:#bfd3dd;line-height:1.6}
+@media(max-width:800px){.zone0-legend{grid-template-columns:1fr 1fr}.zone0-map-stage{min-height:300px}}
+
+</style>
+<style id="v08">
+#main .grid{display:none!important}
+.alt-visual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:22px 0}
+.alt-visual{position:relative;padding:0;border:1px solid #2d5c72;border-radius:18px;overflow:hidden;background:#0b1f2a;cursor:pointer;text-align:left;min-height:300px}
+.alt-visual:hover{border-color:#5ad1ff;transform:translateY(-2px)}
+.alt-visual img{display:block;width:100%;height:235px;object-fit:cover;background:#e8eef1}
+.alt-number{position:absolute;left:18px;top:18px;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#079ed8;color:#fff;border:4px solid #fff;font-size:25px;font-weight:900;box-shadow:0 5px 18px #0008}
+.alt-caption{display:block;padding:16px 18px;color:#fff}.alt-caption b{display:block;font-size:19px;margin-bottom:5px}.alt-caption small{display:block;color:#a9c9d8;font-size:13px}
+.inner-map-wrap{margin:22px 0 28px;padding:18px;border:1px solid #2a586e;border-radius:18px;background:#0b1d27}
+.inner-map-title{font-weight:900;color:#71d7ff;margin-bottom:12px}
+.inner-map-image{position:relative;height:390px;border-radius:14px;overflow:hidden;background:#e5ecef}
+.inner-map-image img{width:100%;height:100%;display:block;object-fit:contain}
+.inner-pin{position:absolute;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;border:4px solid #fff;background:#069fd9;color:#fff;font-size:21px;font-weight:900;cursor:pointer;box-shadow:0 5px 16px #0009}
+.inner-pin:hover{background:#39c9ff;transform:translate(-50%,-50%) scale(1.12)}
+.inner-legend{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.inner-legend div{border:1px solid #28536a;background:#102733;border-radius:10px;padding:9px;color:#c5dbe5;font-size:12px}.inner-legend b{color:#65d5ff;margin-right:5px}
+.inner-info{display:none;margin-top:12px;border:1px solid #32677f;border-radius:11px;padding:12px 14px;background:#102a37;color:#fff}.inner-info.active{display:flex;gap:8px;flex-direction:column}.inner-info span{color:#b7cfda;font-size:13px}
+@media(max-width:900px){.alt-visual-grid{grid-template-columns:1fr}.inner-legend{grid-template-columns:1fr 1fr}.inner-map-image{height:310px}}
+</style><style id="v10-images">
+.v10-photo{height:470px!important;background:#dfe8ec!important}
+.v10-photo img{object-fit:contain!important;background:#dfe8ec!important}
+.visual-zone-v10 .inner-legend{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){.v10-photo{height:330px!important}.visual-zone-v10 .inner-legend{grid-template-columns:1fr 1fr}}
+</style>
+<style id="v11-tech">
+.technical-v11{margin:24px 0 34px}.technical-title-v11{font-size:14px;font-weight:900;letter-spacing:.07em;color:#71d7ff;margin-bottom:8px}
+.technical-intro-v11{color:#b9d0db;line-height:1.55;margin:0 0 14px}
+.tech-card-v11{border:1px solid #28566b;border-radius:14px;background:#102733;padding:16px 18px;margin:10px 0}
+.tech-head-v11{display:flex;align-items:center;gap:12px}.tech-head-v11 span{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#079ed8;color:#fff;font-weight:900;border:3px solid #fff}.tech-head-v11 h3{margin:0;color:#fff;font-size:17px}
+.tech-card-v11 p{color:#c0d4de;line-height:1.55}.tech-card-v11 ul{margin:8px 0 0 22px;color:#a9c7d5;line-height:1.55}
+.supplier-v11{margin-top:16px;border:1px solid #2c718d;border-radius:16px;background:#0c222e;padding:18px}.supplier-v11 h3{margin-top:0;color:#fff}.supplier-v11 p{color:#bdd3dd;line-height:1.55}
+.supplier-grid-v11{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.supplier-grid-v11 div{background:#112f3e;border:1px solid #28576d;border-radius:10px;padding:11px}.supplier-grid-v11 b,.supplier-grid-v11 span{display:block}.supplier-grid-v11 b{color:#69d7ff;margin-bottom:4px}.supplier-grid-v11 span{color:#c5d9e2;font-size:12px}.note-v11{border-left:3px solid #4cc9f0;padding-left:12px}
+@media(max-width:850px){.supplier-grid-v11{grid-template-columns:1fr}}
+</style>
+<style id="v12-deep">.deep-zone{margin:24px 0 34px;padding:18px;border:1px solid #2b5d73;border-radius:18px;background:#0a202b}.deep-zone h2{margin:0 0 7px;color:#fff;font-size:22px}.deep-intro{color:#b8d0db;line-height:1.55}.deep-card{background:#102b38;border:1px solid #2a6078;border-radius:13px;padding:15px 17px;margin:10px 0}.deep-title{display:flex;align-items:center;gap:11px}.deep-title span{min-width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#08a2dc;color:#fff;border:3px solid #fff;font-weight:900}.deep-title h3{margin:0;color:#fff;font-size:17px}.deep-card p{color:#c2d7e0;line-height:1.62;margin:10px 0 2px}</style><style id="v13-zone2">
+.zone2-expanded .deep-card{padding:18px 20px;margin:13px 0}
+.zone2-expanded .deep-card p{font-size:14.5px;line-height:1.68;margin:9px 0;color:#d2e2e9}
+.zone2-expanded .deep-card p b{color:#fff}
+.logic-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+.logic-table th,.logic-table td{border:1px solid #35677b;padding:10px;vertical-align:top;text-align:left}
+.logic-table th{background:#123746;color:#fff}.logic-table td{color:#d3e4eb}
+</style><style id="v14-fix">
+.v14legend{grid-template-columns:repeat(3,1fr)!important}
+.v14pin{width:54px!important;height:54px!important;font-size:23px!important}
+.zone-v14 .deep-card{padding:18px 20px;margin:12px 0}
+.zone-v14 .deep-card p{font-size:14.5px;line-height:1.72;color:#d1e1e8}
+@media(max-width:850px){.v14legend{grid-template-columns:1fr!important}}
+</style><style id="v15-super">
+.super-memory{margin:28px 0 40px;padding:22px;border:1px solid #34718a;border-radius:18px;background:#081f2a}
+.super-memory h2{font-size:25px;color:#fff;margin:0 0 8px}.super-lead{font-size:15px;color:#bcd6e1;line-height:1.7;margin-bottom:18px}
+.super-card{background:#102e3c;border:1px solid #356b82;border-radius:14px;padding:20px 22px;margin:14px 0}
+.super-card h3{font-size:19px;color:#fff;margin:0 0 12px}.super-card p{font-size:14.5px;line-height:1.78;color:#d5e5eb;margin:9px 0}
+.super-card b{color:#70d8ff}
+</style><style id="v16-all-super">
+.all-zones-super{margin:30px 0 44px!important;padding:24px!important}
+.all-zones-super h2{font-size:26px!important}
+.all-zones-super .super-lead{font-size:15.5px!important;line-height:1.75!important}
+.all-zones-super .super-card{padding:22px 24px!important;margin:15px 0!important}
+.all-zones-super .super-card h3{font-size:20px!important;line-height:1.35!important}
+.all-zones-super .super-card p{font-size:15px!important;line-height:1.82!important;margin:10px 0!important}
+</style>
+
+
+
+
+
+
+
+
+
+
+<style id="v22-absolute-top">
+section[id^="zone"] > .hero{display:none!important}
+.v22-zone-home,.v22-detail-page{display:none}
+.v22-zone-home.active,.v22-detail-page.active{display:block}
+
+/* ZERO top gap: visual header is first content below global AURORA bar */
+.v22-zone-home > .inner-map-wrap,
+.v22-detail-page > .inner-map-wrap{
+  margin:0 18px 14px!important;
+  padding:0!important;
+}
+.inner-map-wrap{display:block!important}
+.inner-map-title{margin:0!important;padding:8px 12px!important}
+.inner-map-image{display:block!important;position:relative!important;margin:0!important}
+.inner-pin{display:flex!important;z-index:100!important;cursor:pointer!important}
+.inner-legend{display:grid!important;margin-top:8px!important}
+.v22-source{display:none!important}
+.v22-current{outline:5px solid rgba(112,216,255,.42)!important}
+.v22-detail-body{
+ margin:12px 18px 30px;padding:24px 26px;border:1px solid #34718a;
+ border-radius:16px;background:#0b2633;color:#d5e5eb
+}
+.v22-detail-body h2,.v22-detail-body h3{color:#fff}
+.v22-detail-body p{font-size:15px;line-height:1.82;color:#d5e5eb;margin:10px 0}
+.v22-detail-body b{color:#70d8ff}
+.v22-back{
+ margin:0 18px 8px;padding:8px 13px;border:1px solid #3b7892;border-radius:9px;
+ background:#102f3d;color:#fff;cursor:pointer
+}
+</style>
+
+<style id="v23-final-nav">
+/* Missing main number 9 follows the same visual style automatically. */
+#home .hotspot{cursor:pointer}
+
+/* Dedicated technical fiche. It begins immediately below the fixed top bar. */
+#aurora-detail-screen{
+  display:none; position:fixed; z-index:9999;
+  left:0; right:0; top:64px; bottom:0;
+  overflow:auto; background:#071821; color:#d8e7ed;
+}
+#aurora-detail-screen.active{display:block}
+#aurora-detail-screen .detail-visual{
+  margin:0 auto; padding:0 18px 10px; max-width:1500px;
+}
+#aurora-detail-screen .inner-map-wrap{
+  margin:0!important; padding:10px 14px 14px!important;
+  display:block!important; background:#0b1d27!important;
+}
+#aurora-detail-screen .inner-map-title{margin:0 0 8px!important}
+#aurora-detail-screen .inner-map-image{
+  display:block!important; position:relative!important; margin:0!important;
+}
+#aurora-detail-screen .inner-pin{
+  display:flex!important; z-index:120!important; cursor:pointer!important;
+}
+#aurora-detail-screen .inner-pin.detail-selected{
+  outline:5px solid rgba(113,215,255,.55)!important;
+  transform:translate(-50%,-50%) scale(1.12)!important;
+}
+#aurora-detail-screen .inner-legend{display:grid!important}
+#aurora-detail-screen .inner-info{display:none!important}
+#aurora-detail-screen .detail-actions{
+  max-width:1464px; margin:0 auto; padding:0 18px 8px;
+}
+#aurora-detail-screen .detail-back{
+  border:1px solid #3d7b95;background:#103242;color:#fff;
+  border-radius:9px;padding:9px 15px;font-weight:800;cursor:pointer;
+}
+#aurora-detail-screen .detail-body{
+  max-width:1428px;margin:0 auto 34px;padding:24px 26px;
+  border:1px solid #34718a;border-radius:16px;background:#0b2633;
+}
+#aurora-detail-screen .detail-body h2,
+#aurora-detail-screen .detail-body h3{color:#fff}
+#aurora-detail-screen .detail-body p{
+  color:#d5e5eb;font-size:15px;line-height:1.82;margin:10px 0
+}
+#aurora-detail-screen .detail-body b{color:#70d8ff}
+#aurora-detail-screen .deep-title{display:flex;gap:10px;align-items:center}
+#aurora-detail-screen .deep-title span{
+  display:flex;width:38px;height:38px;border-radius:50%;align-items:center;
+  justify-content:center;background:#08a2dc;border:3px solid #fff;color:#fff;font-weight:900
+}
+</style>
+</head>
+<body>
+<header>
+<button id="back" onclick="goBack()">← Atrás</button>
+<div class="brand">AURORA <b>CORP</b></div>
+<div id="crumb" class="crumb">Proyecto Gominolas · Mapa general</div>
+</header>
+<main>
+
+<section id="home" class="view">
+<div class="hero">
+<span class="tag">GUÍA TÉCNICA + COMPARADOR + PRESUPUESTO</span>
+<h1>Proyecto integral · Línea de gominolas</h1>
+<p>Versión con documentación previa incorporada. Pulsa cada zona para entrar y vuelve atrás de forma normal.</p>
+<div class="kpis">
+<div class="kpi"><b>17</b><span>equipos existentes importados del Excel en Zona de Gominolas</span></div>
+<div class="kpi"><b>13</b><span>documentos técnicos y operativos incorporados</span></div>
+<div class="kpi"><b>3</b><span>alternativas de automatización previstas</span></div>
+<div class="kpi"><b>0 €</b><span>presupuesto aún sin cerrar; empezaremos por equipos reales</span></div>
+</div>
+</div>
+<div class="line-overview">
+<h2>Vista general · Línea completa</h2>
+<p class="lead">Pulsa un número sobre la línea o en la identificación inferior para entrar directamente en esa zona.</p>
+<div class="line-image-wrap">
+<img src="__AURORA_IMG_001__" alt="Vista general de la línea de gominolas AURORA CORP">
+<button class="hotspot" style="left:12%;top:42%" onclick="openZone(0)">0</button>
+<button class="hotspot" style="left:28%;top:45%" onclick="openZone(1)">1</button>
+<button class="hotspot" style="left:43%;top:40%" onclick="openZone(2)">2</button>
+<button class="hotspot" style="left:55%;top:54%" onclick="openZone(3)">3</button>
+<button class="hotspot" style="left:67%;top:55%" onclick="openZone(4)">4</button>
+<button class="hotspot" style="left:79%;top:47%" onclick="openZone(5)">5</button>
+<button class="hotspot" style="left:48%;top:22%" onclick="openZone(6)">6</button>
+<button class="hotspot" style="left:60%;top:22%" onclick="openZone(7)">7</button>
+<button class="hotspot" style="left:71%;top:22%" onclick="openZone(8)">8</button>
+<button class="hotspot" style="left:84%;top:25%" onclick="openZone(9)">9</button>
+<button class="hotspot" style="left:91%;top:21%" onclick="openZone(9)">9</button>
+</div>
+<div class="zone-nav">
+<button class="zone-key" onclick="openZone(0)"><b>0</b>Materias primas y dosificación<br><span>Almacenamiento · pesaje · transporte</span></button>
+<button class="zone-key" onclick="openZone(1)"><b>1</b>Marmitas y reactores<br><span>T-01/T-02 · R-101/R-201/R-202</span></button>
+<button class="zone-key" onclick="openZone(2)"><b>2</b>Vacío · TK-301 · Tolva<br><span>Vacío de proceso · pulmón · alimentación</span></button>
+<button class="zone-key" onclick="openZone(3)"><b>3</b>Formado y proceso final<br><span>Dosificación · formado · túnel</span></button>
+<button class="zone-key" onclick="openZone(4)"><b>4</b>CIP y limpieza<br><span>Limpieza y circuitos CIP</span></button>
+<button class="zone-key" onclick="openZone(5)"><b>5</b>Servicios industriales<br><span>Vapor · aire · frío · servicios</span></button>
+<button class="zone-key" onclick="openZone(6)"><b>6</b>Tuberías y calorifugado<br><span>Producto caliente · aislamiento</span></button>
+<button class="zone-key" onclick="openZone(7)"><b>7</b>Automatización y control<br><span>PLC/HMI · secuencias · interlocks</span></button>
+<button class="zone-key" onclick="openZone(8)"><b>8</b>Seguridad<br><span>Protecciones · alarmas · enclavamientos</span></button>
+<button class="zone-key" onclick="openView('budget','Proyecto Gominolas · Zona 9 · Presupuesto')"><b>9</b>Presupuesto general<br><span>Selección y coste acumulado</span></button>
+</div></div>
+
+
+<div class="grid">
+<div class="card" onclick="openZone(0)"><div class="zone">ZONA 0</div><div class="title">Materias primas y dosificación</div><div class="small"><span class="dot active"></span>Datos automáticos + manuales importados</div></div>
+<div class="card" onclick="openZone(1)"><div class="zone">ZONA 1</div><div class="title">Marmitas y reactores</div><div class="small"><span class="dot done"></span>Memoria técnica cargada</div></div>
+<div class="card" onclick="openZone(2)"><div class="zone">ZONA 2</div><div class="title">Vacío · TK-301 · Tolva</div><div class="small"><span class="dot done"></span>Memoria técnica cargada</div></div>
+<div class="card" onclick="openZone(3)"><div class="zone">ZONA 3</div><div class="title">Formado y proceso final</div><div class="small"><span class="dot"></span>Se completará</div></div>
+<div class="card" onclick="openZone(4)"><div class="zone">ZONA 4</div><div class="title">CIP y limpieza</div><div class="small"><span class="dot"></span>Datos parciales ya recogidos en Z2</div></div>
+<div class="card" onclick="openZone(5)"><div class="zone">ZONA 5</div><div class="title">Servicios industriales</div><div class="small"><span class="dot"></span>Se completará</div></div>
+<div class="card" onclick="openZone(6)"><div class="zone">ZONA 6</div><div class="title">Tuberías y calorifugado</div><div class="small"><span class="dot"></span>Criterios ya recogidos en Z1/Z2</div></div>
+<div class="card" onclick="openZone(7)"><div class="zone">ZONA 7</div><div class="title">Automatización y control</div><div class="small"><span class="dot"></span>PLC/HMI e interlocks en memoria</div></div>
+<div class="card" onclick="openZone(8)"><div class="zone">ZONA 8</div><div class="title">Seguridad</div><div class="small"><span class="dot"></span>Criterios de seguridad en memorias</div></div>
+<div class="card" onclick="openView('budget','Proyecto Gominolas · Zona 9 · Presupuesto')"><div class="zone">ZONA 9</div><div class="title">Presupuesto general</div><div class="small"><span class="dot active"></span>Preparada para ir acumulando selección</div></div>
+<div class="card" onclick="openView('inventory','Proyecto Gominolas · Inventario existente')"><div class="zone">DATOS EXISTENTES</div><div class="title">Excel de maquinaria</div><div class="small"><span class="dot done"></span>17 equipos de Zona de Gominolas importados</div></div>
+<div class="card" onclick="openView('sources','Proyecto Gominolas · Documentación base')"><div class="zone">DOCUMENTOS</div><div class="title">PDF / Excel incorporados</div><div class="small"><span class="dot done"></span>Fuentes de trabajo enlazadas a la guía</div></div>
+</div>
+</section>
+
+
+
+
+<section id="zone3" class="view hidden visual-zone-v10">
+ <div class="hero"><span class="tag">ZONA 3</span><h1>Formado y proceso final</h1>
+ <p>Vista visual de la zona. Pulsa un número sobre la imagen para identificar y abrir cada parte.</p></div>
+ <div class="inner-map-wrap">
+  <div class="inner-map-title">ZONA 3 · Formado y proceso final</div>
+  <div class="inner-map-image v10-photo"><img src="__AURORA_IMG_002__" alt="Formado y proceso final"><button class="inner-pin v14pin" style="left:17%;top:50%" onclick="showZoneInfo(3,1)">1</button><button class="inner-pin v14pin" style="left:50%;top:50%" onclick="showZoneInfo(3,2)">2</button><button class="inner-pin v14pin" style="left:83%;top:50%" onclick="showZoneInfo(3,3)">3</button></div>
+  <div class="inner-legend v14legend"><div><b>1</b> Alimentación final</div><div><b>2</b> Formadora y deposición</div><div><b>3</b> Túnel, gelificación y salida</div></div><div><div id="zone3-info-1" class="inner-info"><b>1 · Alimentación final</b><span>Ruta directa o B-301 convergen antes de PT-401/PIC-401/PCV-401 y tolva final.</span></div><div id="zone3-info-2" class="inner-info"><b>2 · Formadora y deposición</b><span>Demanda de formadora gobierna la alimentación; parada/fallo retira demanda y detiene la bomba activa.</span></div><div id="zone3-info-3" class="inner-info"><b>3 · Túnel, gelificación y salida</b><span>Disponibilidad aguas abajo interbloqueada con la alimentación para evitar producto sin destino.</span></div></div></div>
+  <div><div id="zone3-info-1" class="inner-info"><b>1 · Tolva final</b><span>Tolva final dentro de Formado y proceso final. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone3-info-2" class="inner-info"><b>2 · Formado / dosificación</b><span>Formado / dosificación dentro de Formado y proceso final. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone3-info-3" class="inner-info"><b>3 · Moldes</b><span>Moldes dentro de Formado y proceso final. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone3-info-4" class="inner-info"><b>4 · Gelificación</b><span>Gelificación dentro de Formado y proceso final. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone3-info-5" class="inner-info"><b>5 · Desmolde</b><span>Desmolde dentro de Formado y proceso final. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone3-info-6" class="inner-info"><b>6 · Salida</b><span>Salida dentro de Formado y proceso final. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div></div>
+ </div>
+</section>
+
+<div class="super-memory all-zones-super">
+<h2>Qué es, para qué sirve y cómo funciona · Zona 3</h2>
+<p class="super-lead">Este capítulo explica el propósito real de cada conjunto, qué hace físicamente, cómo interviene en el proceso, qué controla el PLC, con qué equipos se relaciona y qué ocurre si una condición no se cumple.</p>
+<article class="super-card"><h3>1 · Alimentación final y tolva</h3><p><b>Qué Es.</b> Es el último tramo hidráulico antes de la formadora. Recibe producto desde la ruta directa de reactores o desde TK-301/B-301.</p><p><b>Para Qué Sirve.</b> Mantener disponible producto en la tolva sin sobrellenarla y entregar una presión estable a la máquina de formado.</p><p><b>Cómo Se Controla.</b> PT-401 mide presión; PIC-401 compara con la consigna; PCV-401 modula. LSL-HOP solicita producto y LSH-HOP retira la demanda.</p><p><b>Qué Pasa Ante Parada.</b> Si la formadora se detiene, desaparece la demanda, se para la bomba activa y la ruta se lleva a condición segura. PCV es un elemento de regulación, no la protección mecánica frente a una sobrepresión.</p></article><article class="super-card"><h3>2 · Formadora y deposición</h3><p><b>Qué Es.</b> Es el equipo que convierte el flujo continuo/semicontinuo de masa de gominola en dosis individuales depositadas en moldes.</p><p><b>Para Qué Sirve.</b> Garantizar que cada cavidad recibe la cantidad adecuada y que el producto llega con condiciones suficientemente estables de temperatura, viscosidad y presión.</p><p><b>Qué Necesita Del Proceso Anterior.</b> Alimentación disponible, presión estable, producto homogéneo y ausencia de interrupciones que generen vacíos o sobrepresiones.</p><p><b>Qué Devuelve Al Plc.</b> Como mínimo, disponibilidad, marcha, demanda, parada y fallo. Si no puede aceptar producto, el proceso anterior no debe seguir impulsando.</p></article><article class="super-card"><h3>3 · Túnel de frío, gelificación y salida</h3><p><b>Qué Es.</b> Es la parte donde las piezas depositadas adquieren consistencia mediante enfriamiento/gelificación antes de continuar al proceso posterior.</p><p><b>Para Qué Sirve.</b> Estabilizar la forma y textura de la gominola y permitir su manipulación posterior.</p><p><b>Interlock De Línea.</b> La disponibilidad del túnel y de la salida forma parte de la cadena de demanda. Si existe atasco o parada aguas abajo, la alimentación a la formadora debe reducirse/detenerse para no acumular producto.</p><p><b>Qué Se Documentará.</b> Temperaturas, tiempos de residencia, capacidad, estados de ventilación/frío y alarmas cuando dispongamos de los datos reales del equipo.</p></article></div><section id="zone4" class="view hidden visual-zone-v10">
+ <div class="hero"><span class="tag">ZONA 4</span><h1>CIP y limpieza</h1>
+ <p>Vista visual de la zona. Pulsa un número sobre la imagen para identificar y abrir cada parte.</p></div>
+ <div class="inner-map-wrap">
+  <div class="inner-map-title">ZONA 4 · CIP y limpieza</div>
+  <div class="inner-map-image v10-photo"><img src="__AURORA_IMG_003__" alt="CIP y limpieza"><button class="inner-pin v14pin" style="left:17%;top:50%" onclick="showZoneInfo(4,1)">1</button><button class="inner-pin v14pin" style="left:50%;top:50%" onclick="showZoneInfo(4,2)">2</button><button class="inner-pin v14pin" style="left:83%;top:50%" onclick="showZoneInfo(4,3)">3</button></div>
+  <div class="inner-legend v14legend"><div><b>1</b> Selección y aislamiento CIP</div><div><b>2</b> Lavado / circulación / drenaje</div><div><b>3</b> Enjuague y liberación</div></div><div><div id="zone4-info-1" class="inner-info"><b>1 · Selección y aislamiento CIP</b><span>Producción y CIP mutuamente excluyentes; válvulas de producto aisladas antes de iniciar limpieza.</span></div><div id="zone4-info-2" class="inner-info"><b>2 · Lavado / circulación / drenaje</b><span>Agua automática, llenado parcial, circulación, drenaje y repetición según secuencia.</span></div><div id="zone4-info-3" class="inner-info"><b>3 · Enjuague y liberación</b><span>Enjuague final, drenaje, cierre de rutas CIP y liberación de producción solo sin alarmas.</span></div></div></div>
+  <div><div id="zone4-info-1" class="inner-info"><b>1 · Entrada de agua</b><span>Entrada de agua dentro de CIP y limpieza. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone4-info-2" class="inner-info"><b>2 · Selección de circuito</b><span>Selección de circuito dentro de CIP y limpieza. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone4-info-3" class="inner-info"><b>3 · Circulación</b><span>Circulación dentro de CIP y limpieza. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone4-info-4" class="inner-info"><b>4 · Drenaje</b><span>Drenaje dentro de CIP y limpieza. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone4-info-5" class="inner-info"><b>5 · Retorno</b><span>Retorno dentro de CIP y limpieza. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone4-info-6" class="inner-info"><b>6 · Enjuague final</b><span>Enjuague final dentro de CIP y limpieza. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div></div>
+ </div>
+</section>
+
+<div class="super-memory all-zones-super">
+<h2>Qué es, para qué sirve y cómo funciona · Zona 4</h2>
+<p class="super-lead">Este capítulo explica el propósito real de cada conjunto, qué hace físicamente, cómo interviene en el proceso, qué controla el PLC, con qué equipos se relaciona y qué ocurre si una condición no se cumple.</p>
+<article class="super-card"><h3>1 · Selección CIP y aislamiento</h3><p><b>Qué Es.</b> Es el modo automático de limpieza de equipos y tuberías. No es simplemente “abrir agua”: es una secuencia que cambia la instalación de PRODUCCIÓN a LIMPIEZA.</p><p><b>Para Qué Sirve.</b> Retirar restos de producto de forma repetible y evitar que una ruta de producción permanezca comunicada durante la limpieza.</p><p><b>Cómo Empieza.</b> El PLC comprueba que no hay una transferencia de producto activa, ordena aislar producción y posiciona las válvulas del circuito CIP seleccionado.</p><p><b>Interlock.</b> Mientras una zona está EN CIP, las órdenes normales de producción asociadas quedan bloqueadas. Una válvula que no confirme posición impide avanzar.</p></article><article class="super-card"><h3>2 · Lavado, circulación y drenaje</h3><p><b>Qué Hace.</b> Según la filosofía acordada: apertura automática de agua → llenado parcial o volumen definido → circulación/movimiento → drenaje → repetición según procedimiento.</p><p><b>Para Qué Sirve Cada Fase.</b> El llenado aporta líquido; la circulación crea velocidad/acción mecánica; el drenaje elimina suciedad desprendida y evita dilución infinita.</p><p><b>Bombas.</b> Solo arrancan con impulsión y retorno/drenaje disponibles. No se permite bombear contra una ruta cerrada.</p><p><b>Drenaje.</b> Las rutas de drenaje se mantienen separadas de producto. El condensado de V-401 pertenece al sistema de vacío y también va a drenaje, pero no se confunde con el retorno CIP.</p></article><article class="super-card"><h3>3 · Enjuague final y liberación</h3><p><b>Qué Es.</b> Es la fase que devuelve la instalación desde LIMPIEZA a DISPONIBLE PARA PRODUCCIÓN.</p><p><b>Qué Hace.</b> Ejecuta el enjuague final, vacía el circuito, devuelve válvulas a posición segura y comprueba que no quedan pasos CIP abiertos.</p><p><b>Cuándo Libera.</b> Solo cuando la secuencia está terminada, las rutas CIP están cerradas y no existen alarmas que comprometan higiene u operación.</p><p><b>Por Qué Es Importante.</b> Evita comenzar una receta con agua de limpieza retenida, una válvula de drenaje abierta o una conexión CIP todavía habilitada.</p></article></div><section id="zone5" class="view hidden visual-zone-v10">
+ <div class="hero"><span class="tag">ZONA 5</span><h1>Servicios industriales</h1>
+ <p>Vista visual de la zona. Pulsa un número sobre la imagen para identificar y abrir cada parte.</p></div>
+ <div class="inner-map-wrap">
+  <div class="inner-map-title">ZONA 5 · Servicios industriales</div>
+  <div class="inner-map-image v10-photo"><img src="__AURORA_IMG_004__" alt="Servicios industriales"><button class="inner-pin v14pin" style="left:17%;top:50%" onclick="showZoneInfo(5,1)">1</button><button class="inner-pin v14pin" style="left:50%;top:50%" onclick="showZoneInfo(5,2)">2</button><button class="inner-pin v14pin" style="left:83%;top:50%" onclick="showZoneInfo(5,3)">3</button></div>
+  <div class="inner-legend v14legend"><div><b>1</b> Vapor + condensados</div><div><b>2</b> Aire comprimido</div><div><b>3</b> Frío + agua + electricidad</div></div><div><div id="zone5-info-1" class="inner-info"><b>1 · Vapor + condensados</b><span>Camisas de reactores y tramos térmicos con válvulas, purga y retorno de condensado.</span></div><div id="zone5-info-2" class="inner-info"><b>2 · Aire comprimido</b><span>Aire regulado para enfriamiento de camisa, actuadores y juntas inflables; enclavado con vapor.</span></div><div id="zone5-info-3" class="inner-info"><b>3 · Frío + agua + electricidad</b><span>Frío de C-101, agua CIP y alimentación eléctrica/control con alarmas por pérdida de servicio.</span></div></div></div>
+  <div><div id="zone5-info-1" class="inner-info"><b>1 · Vapor</b><span>Vapor dentro de Servicios industriales. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone5-info-2" class="inner-info"><b>2 · Condensados</b><span>Condensados dentro de Servicios industriales. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone5-info-3" class="inner-info"><b>3 · Aire comprimido</b><span>Aire comprimido dentro de Servicios industriales. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone5-info-4" class="inner-info"><b>4 · Frío</b><span>Frío dentro de Servicios industriales. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone5-info-5" class="inner-info"><b>5 · Agua</b><span>Agua dentro de Servicios industriales. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone5-info-6" class="inner-info"><b>6 · Electricidad</b><span>Electricidad dentro de Servicios industriales. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div></div>
+ </div>
+</section>
+
+<div class="super-memory all-zones-super">
+<h2>Qué es, para qué sirve y cómo funciona · Zona 5</h2>
+<p class="super-lead">Este capítulo explica el propósito real de cada conjunto, qué hace físicamente, cómo interviene en el proceso, qué controla el PLC, con qué equipos se relaciona y qué ocurre si una condición no se cumple.</p>
+<article class="super-card"><h3>1 · Vapor y condensados</h3><p><b>Qué Es.</b> El vapor es el servicio térmico que aporta energía a las camisas de reactor y, cuando se determine, a tramos encamisados.</p><p><b>Para Qué Sirve.</b> Calentar el producto de forma indirecta sin mezclar vapor con la masa.</p><p><b>Qué Hace La Válvula De Vapor.</b> Habilita/regula el servicio según fase de receta. Una condición de presión o temperatura alta debe retirar el aporte térmico.</p><p><b>Condensados.</b> Cuando el vapor entrega calor se condensa. Ese líquido debe evacuarse mediante pendientes, purgadores y retorno; una camisa inundada pierde eficacia y puede generar funcionamiento irregular.</p></article><article class="super-card"><h3>2 · Aire comprimido</h3><p><b>Aire De Enfriamiento.</b> Existe una entrada independiente a la camisa para enfriamiento rápido. No se abre simultáneamente de forma indiscriminada con vapor. La transición es secuencial y la presión se regula a la admisible de la camisa.</p><p><b>Aire De Instrumentación.</b> Alimenta actuadores neumáticos, electroválvulas y juntas inflables de los depósitos de aditivos.</p><p><b>Qué Pasa Si Falta Aire.</b> El PLC identifica la pérdida del servicio, bloquea movimientos que necesiten presión neumática y evita, por ejemplo, descargar un aditivo si no puede confirmar el sellado.</p></article><article class="super-card"><h3>3 · Frío, agua, electricidad y control</h3><p><b>Frío.</b> El módulo frigorífico de C-101 permite condensar vapor antes de VP-101. Si no está disponible o la temperatura de salida es excesiva, el vacío debe limitarse/inhibirse.</p><p><b>Agua.</b> Alimenta la secuencia CIP y otros servicios definidos. Su disponibilidad debe comprobarse antes de iniciar una limpieza automática.</p><p><b>Electricidad.</b> Alimenta bombas, cuadros, PLC/HMI, variadores e instrumentación. Protecciones eléctricas y estados de fallo se integran en diagnóstico.</p><p><b>Control.</b> La pérdida de un servicio crítico no debe dejar la instalación en una condición ambigua: el PLC identifica qué función se ve afectada y ejecuta la parada segura correspondiente.</p></article></div><section id="zone6" class="view hidden visual-zone-v10">
+ <div class="hero"><span class="tag">ZONA 6</span><h1>Tuberías y calorifugado</h1>
+ <p>Vista visual de la zona. Pulsa un número sobre la imagen para identificar y abrir cada parte.</p></div>
+ <div class="inner-map-wrap">
+  <div class="inner-map-title">ZONA 6 · Tuberías y calorifugado</div>
+  <div class="inner-map-image v10-photo"><img src="__AURORA_IMG_005__" alt="Tuberías y calorifugado"><button class="inner-pin v14pin" style="left:17%;top:50%" onclick="showZoneInfo(6,1)">1</button><button class="inner-pin v14pin" style="left:50%;top:50%" onclick="showZoneInfo(6,2)">2</button><button class="inner-pin v14pin" style="left:83%;top:50%" onclick="showZoneInfo(6,3)">3</button></div>
+  <div class="inner-legend v14legend"><div><b>1</b> Producto caliente</div><div><b>2</b> Camisas térmicas / vapor</div><div><b>3</b> Calorifugado y accesibilidad</div></div><div><div id="zone6-info-1" class="inner-info"><b>1 · Producto caliente</b><span>Líneas desde bombas de reactor, colector, XV-300, TK-301/B-301 y alimentación final.</span></div><div id="zone6-info-2" class="inner-info"><b>2 · Camisas térmicas / vapor</b><span>Tramos críticos de doble pared con entrada de vapor, purga y retorno de condensados.</span></div><div id="zone6-info-3" class="inner-info"><b>3 · Calorifugado y accesibilidad</b><span>Aislamiento térmico continuo sin impedir mantenimiento de válvulas, bombas e instrumentación.</span></div></div></div>
+  <div><div id="zone6-info-1" class="inner-info"><b>1 · Producto caliente</b><span>Producto caliente dentro de Tuberías y calorifugado. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone6-info-2" class="inner-info"><b>2 · Camisas / doble pared</b><span>Camisas / doble pared dentro de Tuberías y calorifugado. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone6-info-3" class="inner-info"><b>3 · Vapor</b><span>Vapor dentro de Tuberías y calorifugado. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone6-info-4" class="inner-info"><b>4 · Condensados</b><span>Condensados dentro de Tuberías y calorifugado. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone6-info-5" class="inner-info"><b>5 · Calorifugado</b><span>Calorifugado dentro de Tuberías y calorifugado. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone6-info-6" class="inner-info"><b>6 · Colectores</b><span>Colectores dentro de Tuberías y calorifugado. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div></div>
+ </div>
+</section>
+
+<div class="super-memory all-zones-super">
+<h2>Qué es, para qué sirve y cómo funciona · Zona 6</h2>
+<p class="super-lead">Este capítulo explica el propósito real de cada conjunto, qué hace físicamente, cómo interviene en el proceso, qué controla el PLC, con qué equipos se relaciona y qué ocurre si una condición no se cumple.</p>
+<article class="super-card"><h3>1 · Red de producto caliente</h3><p><b>Qué Es.</b> Es toda la red sanitaria que transporta masa de gominola caliente desde las bombas de los reactores hasta la tolva/formadora, incluyendo colector, XV-300, ruta a TK-301 y descarga B-301.</p><p><b>Para Qué Sirve El Calorifugado.</b> Reducir pérdida de calor para evitar aumento excesivo de viscosidad, depósitos y solidificación local. También reduce temperatura superficial accesible al personal.</p><p><b>Qué Tramos Son Críticos.</b> Después de B-101/B-201/B-202, colector común, XV-300, línea a TK-301, B-301/EV-301 y línea PT/PIC/PCV.</p><p><b>Qué No Se Debe Hacer.</b> Cubrir actuadores, finales de carrera, transmisores o uniones que deban desmontarse. El aislamiento debe incorporar soluciones desmontables donde haya mantenimiento.</p></article><article class="super-card"><h3>2 · Tubería encamisada, vapor y condensados</h3><p><b>Qué Es.</b> En los tramos donde el aislamiento pasivo no baste, se puede utilizar una segunda envolvente por la que circula un servicio térmico.</p><p><b>Para Qué Sirve.</b> Compensar las pérdidas de calor de la tubería de producto y mantener condiciones de transporte estables.</p><p><b>Cómo Funciona.</b> Vapor entra en la camisa, cede calor y genera condensado. Cada sección necesita entrada, aislamiento, purga y salida/retorno. No debe existir comunicación con producto.</p><p><b>Por Qué Importa El Condensado.</b> Si no se evacua, la camisa pierde capacidad térmica y pueden aparecer golpes/temperaturas irregulares. Pendientes y purgadores forman parte del diseño, no son accesorios opcionales.</p></article><article class="super-card"><h3>3 · Válvulas, soportación, dilatación y diseño final</h3><p><b>Valvulería.</b> EV-101/201/202 determinan qué reactor descarga; XV-300 selecciona DIRECTO/TK-301; V-301/EV-301 gobiernan la descarga del pulmón; PCV-401 regula presión final. El aislamiento debe permitir acceso a todos ellos.</p><p><b>Soportación.</b> Una línea caliente cambia de longitud por dilatación. Soportes, guías y puntos fijos deben impedir que esas fuerzas terminen cargando las bocas de bombas, válvulas o depósitos.</p><p><b>Drenabilidad.</b> La geometría debe permitir vaciado y CIP evitando fondos de saco innecesarios.</p><p><b>Datos Pendientes.</b> Las longitudes se mantienen como X m hasta medición. DN, espesor de aislamiento, pérdidas térmicas, expansión y soportación se cierran por cálculo.</p></article></div><section id="zone7" class="view hidden visual-zone-v10">
+ <div class="hero"><span class="tag">ZONA 7</span><h1>Automatización y control</h1>
+ <p>Vista visual de la zona. Pulsa un número sobre la imagen para identificar y abrir cada parte.</p></div>
+ <div class="inner-map-wrap">
+  <div class="inner-map-title">ZONA 7 · Automatización y control</div>
+  <div class="inner-map-image v10-photo"><img src="__AURORA_IMG_006__" alt="Automatización y control"><button class="inner-pin v14pin" style="left:17%;top:50%" onclick="showZoneInfo(7,1)">1</button><button class="inner-pin v14pin" style="left:50%;top:50%" onclick="showZoneInfo(7,2)">2</button><button class="inner-pin v14pin" style="left:83%;top:50%" onclick="showZoneInfo(7,3)">3</button></div>
+  <div class="inner-legend v14legend"><div><b>1</b> PLC + HMI</div><div><b>2</b> Instrumentación + accionamientos</div><div><b>3</b> Valvulería + interlocks</div></div><div><div id="zone7-info-1" class="inner-info"><b>1 · PLC + HMI</b><span>Secuencias, recetas, permisos, diagnóstico, estados reales y causa exacta de cada bloqueo.</span></div><div id="zone7-info-2" class="inner-info"><b>2 · Instrumentación + accionamientos</b><span>Brix, P/T, vacío, señales de tolva, bombas, variadores y confirmaciones de posición.</span></div><div id="zone7-info-3" class="inner-info"><b>3 · Valvulería + interlocks</b><span>Control integral de válvulas de proceso, vacío, vapor, aire, aditivos, XV-300, EV-301, PCV-401 y CIP.</span></div></div></div>
+  <div><div id="zone7-info-1" class="inner-info"><b>1 · PLC</b><span>PLC dentro de Automatización y control. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone7-info-2" class="inner-info"><b>2 · HMI</b><span>HMI dentro de Automatización y control. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone7-info-3" class="inner-info"><b>3 · Sensores</b><span>Sensores dentro de Automatización y control. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone7-info-4" class="inner-info"><b>4 · Válvulas automáticas</b><span>Válvulas automáticas dentro de Automatización y control. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone7-info-5" class="inner-info"><b>5 · Bombas / variadores</b><span>Bombas / variadores dentro de Automatización y control. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone7-info-6" class="inner-info"><b>6 · Alarmas e interlocks</b><span>Alarmas e interlocks dentro de Automatización y control. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div></div>
+ </div>
+</section>
+
+<div class="super-memory all-zones-super">
+<h2>Qué es, para qué sirve y cómo funciona · Zona 7</h2>
+<p class="super-lead">Este capítulo explica el propósito real de cada conjunto, qué hace físicamente, cómo interviene en el proceso, qué controla el PLC, con qué equipos se relaciona y qué ocurre si una condición no se cumple.</p>
+<article class="super-card"><h3>1 · PLC y HMI</h3><p><b>Qué Es El Plc.</b> Es el controlador que ejecuta la lógica real de la instalación. No “muestra” el proceso: decide si una acción está permitida, da órdenes y comprueba que el resultado físico coincide.</p><p><b>Qué Controla.</b> T-01/T-02, B-01, selección de reactores, bombas B-101/201/202, EV-101/201/202, vacío, C-101/V-401/VP-101, vapor, aire de enfriamiento, aditivos, XV-300, TK-301/B-301/EV-301, PT/PIC/PCV, tolva, formadora y CIP.</p><p><b>Qué Es La Hmi.</b> Es la interfaz del operario. Debe explicar el estado: receta/fase, origen, destino, válvulas ordenadas y reales, bombas, P/T, °Brix, vacío, demanda, CIP y alarmas.</p><p><b>Diagnóstico.</b> Si algo no arranca, la HMI debe decir por qué: “EV-201 no confirma cerrada”, “sin disponibilidad de frío”, “formadora sin demanda”, etc., no un genérico “interlock activo”.</p></article><article class="super-card"><h3>2 · Instrumentación y accionamientos</h3><p><b>Qué Mide.</b> BRX-101/201/202 mide continuamente °Brix en la zona inferior/salida; cada reactor tiene temperatura de producto y de camisa; PT/PI supervisan presión; PT-401 alimenta el lazo final; el sistema de vacío aporta sus variables de protección; la tolva final dispone de LSL/LSH.</p><p><b>Qué No Existe.</b> No se añaden transmisores de nivel en reactores ni TK-301.</p><p><b>Qué Acciona.</b> Bombas, variadores, actuadores neumáticos, válvulas de proceso, vacío, vapor, aire, CIP y PCV-401.</p><p><b>Para Qué Sirve El Feedback.</b> Una orden de abrir no significa que la válvula esté abierta. Cuando corresponda, el PLC necesita confirmación física. Si no llega dentro del tiempo permitido, genera discrepancia y no continúa.</p></article><article class="super-card"><h3>3 · Válvulas, interlocks y causa-efecto</h3><p><b>Válvulas De Proceso.</b> Selección T-01/T-02; destinos B-01→R-101/R-201/R-202; EV-101/201/202; XV-300; V-301/EV-301 y PCV-401.</p><p><b>Válvulas De Vacío.</b> XV-VAC-101/201/202, con exclusión para que solo el reactor previsto quede conectado.</p><p><b>Válvulas De Servicios.</b> Vapor de camisa, aire de enfriamiento, actuadores/juntas, aditivos y rutas CIP.</p><p><b>Qué Hace Un Interlock.</b> Evita ejecutar una acción cuando su consecuencia sería incorrecta o peligrosa. Ejemplos: EV no confirma abierta → bomba no arranca; otra rama EV sigue abierta → no transferir; fallo de frío → no exigir vacío; LSH-HOP → retirar demanda; formadora parada → detener alimentación.</p><p><b>Causa-Efecto.</b> Cada alarma debe tener una reacción definida: bloquear arranque, detener bomba, cerrar/aislar una rama, retirar vapor, inhibir vacío o mantener el proceso en espera. La seguridad mecánica crítica permanece independiente del PLC.</p></article></div><section id="zone8" class="view hidden visual-zone-v10">
+ <div class="hero"><span class="tag">ZONA 8</span><h1>Seguridad</h1>
+ <p>Vista visual de la zona. Pulsa un número sobre la imagen para identificar y abrir cada parte.</p></div>
+ <div class="inner-map-wrap">
+  <div class="inner-map-title">ZONA 8 · Seguridad</div>
+  <div class="inner-map-image v10-photo"><img src="__AURORA_IMG_007__" alt="Seguridad"><button class="inner-pin v14pin" style="left:17%;top:50%" onclick="showZoneInfo(8,1)">1</button><button class="inner-pin v14pin" style="left:50%;top:50%" onclick="showZoneInfo(8,2)">2</button><button class="inner-pin v14pin" style="left:83%;top:50%" onclick="showZoneInfo(8,3)">3</button></div>
+  <div class="inner-legend v14legend"><div><b>1</b> Presión / vacío / temperatura</div><div><b>2</b> Bombas / rutas / válvulas</div><div><b>3</b> Operador / aditivos / E-stop</div></div><div><div id="zone8-info-1" class="inner-info"><b>1 · Presión / vacío / temperatura</b><span>PSV, vacuum breaker, PT/PI y enclavamientos térmicos independientes de la lógica normal.</span></div><div id="zone8-info-2" class="inner-info"><b>2 · Bombas / rutas / válvulas</b><span>Prevención de dead-head, arranque solo con ruta confirmada y parada ante pérdida de feedback.</span></div><div id="zone8-info-3" class="inner-info"><b>3 · Operador / aditivos / E-stop</b><span>Cierre seguro de tapas, junta inflable, descarga de aditivos y parada de emergencia.</span></div></div></div>
+  <div><div id="zone8-info-1" class="inner-info"><b>1 · Presión</b><span>Presión dentro de Seguridad. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone8-info-2" class="inner-info"><b>2 · Vacío</b><span>Vacío dentro de Seguridad. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone8-info-3" class="inner-info"><b>3 · Temperatura</b><span>Temperatura dentro de Seguridad. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone8-info-4" class="inner-info"><b>4 · Protección de bombas</b><span>Protección de bombas dentro de Seguridad. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone8-info-5" class="inner-info"><b>5 · Parada de emergencia</b><span>Parada de emergencia dentro de Seguridad. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone8-info-6" class="inner-info"><b>6 · Seguridad de operador</b><span>Seguridad de operador dentro de Seguridad. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div></div>
+ </div>
+</section>
+<div class="super-memory all-zones-super">
+<h2>Qué es, para qué sirve y cómo funciona · Zona 8</h2>
+<p class="super-lead">Este capítulo explica el propósito real de cada conjunto, qué hace físicamente, cómo interviene en el proceso, qué controla el PLC, con qué equipos se relaciona y qué ocurre si una condición no se cumple.</p>
+<article class="super-card"><h3>1 · Presión, vacío y temperatura</h3><p><b>Presión.</b> PT/PI permiten conocer la condición del recipiente. La PSV proporciona alivio mecánico de sobrepresión y se tara según cálculo/MAWP, no con un valor inventado.</p><p><b>Vacío.</b> Los reactores disponen de protección frente a vacío excesivo mediante vacuum breaker. TK-301 no usa vacío de proceso y requiere respiración/anti-vacío frente a depresión accidental.</p><p><b>Temperatura.</b> Producto y camisa se vigilan separadamente. Vapor y aire de enfriamiento quedan enclavados para evitar una transición incorrecta.</p><p><b>Tapas.</b> Una tapa de reactor no debe liberarse si la condición de presión/vacío no es segura.</p></article><article class="super-card"><h3>2 · Bombas, rutas y válvulas</h3><p><b>Riesgo Principal.</b> Una bomba de desplazamiento positivo puede elevar rápidamente la presión si impulsa contra una válvula cerrada.</p><p><b>Cómo Se Evita.</b> El PLC confirma ruta y válvula de descarga antes de arrancar. Si se pierde feedback durante marcha, detiene la bomba. El diseño incorpora además la protección de presión/bypass o solución mecánica aprobada que corresponda.</p><p><b>Otros Fallos.</b> Sobrecarga eléctrica, fallo de marcha, ruta contradictoria o válvula fuera de posición generan alarma y bloquean la secuencia.</p></article><article class="super-card"><h3>3 · Aditivos, operador y parada de emergencia</h3><p><b>Aditivos.</b> El pequeño depósito superior se carga con válvula inferior cerrada. Después se cierra la tapa, se presuriza la junta inflable y el PLC comprueba el sellado y que la presión/vacío del reactor permita la maniobra. Solo entonces abre la descarga vertical.</p><p><b>Operador.</b> Las protecciones deben impedir apertura/maniobras incompatibles con presión, vacío o movimiento peligroso.</p><p><b>E-Stop.</b> La parada de emergencia detiene los accionamientos afectados y lleva las válvulas/servicios a su estado seguro definido. El rearme no reinicia automáticamente el proceso: primero se elimina la causa y se restablecen permisivas.</p><p><b>Independencia.</b> PSV, vacuum breaker y otras protecciones mecánicas esenciales no pueden depender exclusivamente del software.</p></article></div><section id="zone0" class="view hidden">
+<div class="hero"><span class="tag">ZONA 0</span><h1>Materias primas y dosificación</h1>
+<p>Elige una configuración pulsando directamente sobre su imagen.</p></div>
+<div class="alt-visual-grid">
+<button class="alt-visual" onclick="openView('z0auto','Zona 0 · Automatizada')"><img src="__AURORA_IMG_008__"><span class="alt-number">1</span><span class="alt-caption"><b>Automatizada</b><small>Pesaje + dosificación + envío automático</small></span></button>
+<button class="alt-visual" onclick="openView('z0semi','Zona 0 · Semiautomatizada')"><img src="__AURORA_IMG_009__"><span class="alt-number">2</span><span class="alt-caption"><b>Semiautomatizada</b><small>Carga manual + envío automatizado</small></span></button>
+<button class="alt-visual" onclick="openView('z0manual','Zona 0 · No automatizada')"><img src="__AURORA_IMG_010__"><span class="alt-number">3</span><span class="alt-caption"><b>Proceso actual</b><small>Reactores / proceso base existente</small></span></button>
+</div></section>
+
+<div class="super-memory all-zones-super">
+<h2>Qué es, para qué sirve y cómo funciona · Zona 0</h2>
+<p class="super-lead">Este capítulo explica el propósito real de cada conjunto, qué hace físicamente, cómo interviene en el proceso, qué controla el PLC, con qué equipos se relaciona y qué ocurre si una condición no se cumple.</p>
+<article class="super-card"><h3>1 · Alternativa automatizada · materias primas, pesaje y aspiración</h3><p><b>Qué Es.</b> Es el sistema que transforma la preparación manual de ingredientes secos en una alimentación por receta: depósito o tolva alimentaria, pesaje mediante células de carga, dosificación gravimétrica y transporte cerrado del polvo hacia la marmita seleccionada.</p><p><b>Para Qué Sirve.</b> Su objetivo es que el operario no tenga que pesar cada ingrediente y transportarlo manualmente hasta T-01/T-02. Permite repetir recetas, registrar cantidades, reducir errores de dosificación, contener polvo y preparar automáticamente la cantidad solicitada.</p><p><b>Qué Hace.</b> El PLC recibe la receta y la cantidad objetivo. Comprueba que el depósito correcto está disponible, toma el peso real de las células de carga, acciona el elemento dosificador y calcula continuamente cuánto producto ha salido. Al aproximarse al objetivo puede reducir velocidad para mejorar precisión. Cuando alcanza el peso programado detiene la dosificación y habilita el transporte neumático.</p><p><b>Cómo Se Mueve El Polvo.</b> El producto dosificado entra en una línea cerrada donde una fuente de vacío crea presión negativa. El polvo es aspirado, circula con el aire por la tubería y llega a un receptor/separador en destino. Allí el producto se separa del aire y cae hacia T-01 o T-02. No se trata de soplar polvo libremente por la planta: es un circuito cerrado diseñado para producto alimentario.</p><p><b>Qué Controla.</b> Peso inicial/final, cantidad de receta, estado del dosificador, disponibilidad del vacío, destino T-01/T-02, posición de válvulas/desvíos, tiempo máximo de transferencia, filtro/receptor y alarmas. La capacidad, caudal y DN definitivos quedan pendientes de consumos reales, densidad aparente y ensayo de producto.</p><p><b>Qué Pasa Si Falla.</b> Si no baja el peso cuando debería dosificar, si se supera el tiempo de transferencia, si el destino no está confirmado o si el vacío falla, la secuencia se detiene y la HMI debe indicar la causa, no simplemente mostrar “fallo”.</p></article><article class="super-card"><h3>2 · Alternativa semiautomatizada · preparación manual + transferencia automática</h3><p><b>Qué Es.</b> Mantiene el pesaje y carga de materias primas por operario, pero automatiza la parte que comienza en T-01/T-02: selección de marmita, B-01 común y envío al reactor seleccionado.</p><p><b>Para Qué Sirve.</b> Reduce inversión frente a la automatización completa pero elimina una parte crítica de la manipulación posterior: una vez preparada la mezcla en una marmita, el sistema puede enviarla de forma controlada a R-101, R-201 o R-202.</p><p><b>Qué Hace El Operario.</b> Prepara y carga los ingredientes, arranca/agita según procedimiento y declara la marmita preparada. A partir de ahí el PLC solicita origen y destino y verifica la ruta.</p><p><b>Qué Hace El Automatismo.</b> Selecciona exclusivamente T-01 o T-02, confirma la válvula de origen, selecciona un único reactor, confirma el destino y permite B-01. La entrada a reactor se realiza por la conexión lateral aproximadamente a media altura. No se utiliza la descarga inferior del reactor como entrada.</p><p><b>Interlock Principal.</b> B-01 no puede arrancar si hay dos orígenes, dos destinos, una válvula sin confirmar o una ruta incompleta. Si una confirmación desaparece durante bombeo, la bomba se detiene y se genera alarma identificando el elemento que ha perdido estado.</p></article><article class="super-card"><h3>3 · Alternativa actual/no automatizada · proceso base</h3><p><b>Qué Es.</b> Es la referencia del funcionamiento actual/manual que sirve para comparar inversión, carga de trabajo, repetibilidad y riesgo operativo frente a las dos alternativas anteriores.</p><p><b>Para Qué Sirve En La Guía.</b> No es una propuesta de automatización nueva. Documenta cómo se trabaja y qué equipos existen para poder decidir qué se conserva, qué se automatiza y qué debe modificarse.</p><p><b>Qué Contiene.</b> Reactores de 500 L y 200 L, preparación y adiciones, cocción, vacío, control de °Brix, transferencia y proceso posterior. La memoria integral incorporada en esta alternativa se conserva como documento técnico de referencia.</p><p><b>Criterio De Comparación.</b> Para cada mejora futura se indicará qué tarea manual elimina, qué equipo añade, qué señal necesita, qué riesgo reduce y cuánto cuesta. Así el presupuesto no será una lista de máquinas sin explicar por qué se compran.</p></article></div><section id="z0auto" class="view hidden">
+<div class="hero"><span class="tag">ZONA 0 · AUTOMATIZADA</span><h1>Almacenamiento, pesada y dosificación automática</h1>
+<p>Contenido base importado de la memoria técnica, aplicando la configuración actual acordada del proyecto.</p></div><div class="inner-map-wrap"><div class="inner-map-title">Alternativa 1 · Automatizada · pulsa un número</div>
+<div class="inner-map-image"><img src="__AURORA_IMG_011__"><button class="inner-pin" style="left:8.0%;top:43%" onclick="showInnerInfo('z0auto',1)">1</button><button class="inner-pin" style="left:24.8%;top:59%" onclick="showInnerInfo('z0auto',2)">2</button><button class="inner-pin" style="left:41.6%;top:43%" onclick="showInnerInfo('z0auto',3)">3</button><button class="inner-pin" style="left:58.4%;top:59%" onclick="showInnerInfo('z0auto',4)">4</button><button class="inner-pin" style="left:75.2%;top:43%" onclick="showInnerInfo('z0auto',5)">5</button><button class="inner-pin" style="left:92.0%;top:59%" onclick="showInnerInfo('z0auto',6)">6</button></div>
+<div class="inner-legend"><div><b>0</b> Depósitos / tolvas</div><div><b>1</b> Células de carga</div><div><b>2</b> Dosificación</div><div><b>3</b> Aspiración por vacío</div><div><b>4</b> Receptor / filtración</div><div><b>5</b> Envío T-01 / T-02</div></div><div><div id="z0auto-info-1" class="inner-info"><b>0 · Depósitos / tolvas</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0auto-info-2" class="inner-info"><b>1 · Células de carga</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0auto-info-3" class="inner-info"><b>2 · Dosificación</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0auto-info-4" class="inner-info"><b>3 · Aspiración por vacío</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0auto-info-5" class="inner-info"><b>4 · Receptor / filtración</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0auto-info-6" class="inner-info"><b>5 · Envío T-01 / T-02</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div></div></div>
+<div class="technical-v11">
+ <div class="technical-title-v11">DATOS TÉCNICOS · ZONA 0 · ALTERNATIVA AUTOMATIZADA</div>
+ <p class="technical-intro-v11">Los números siguientes corresponden directamente con los números del dibujo superior. Los valores que todavía requieren receta, ensayo o cálculo se mantienen expresamente como pendientes.</p>
+ 
+<div class="tech-card-v11" id="z0-tech-1">
+ <div class="tech-head-v11"><span>1</span><h3>Depósitos / tolvas de polvo</h3></div>
+ <p>Función AURORA: almacenamiento/pulmón de ingredientes secos antes de dosificación. La solución de referencia GIMAT admite tolvas y estaciones de descarga integrables con transporte neumático. Para sacos, GIMAT ofrece tolvas de 150/300 L; para dosificación gravimétrica, la gama estándar de tolvas cilíndricas va de 30 a 350 L. En nuestro proyecto la capacidad definitiva queda PENDIENTE DE CÁLCULO según consumo por receta, autonomía deseada y densidad aparente del ingrediente.</p>
+ <ul><li>Construcción objetivo: AISI 304 o 316L, contacto alimentario.</li><li>Acabado interior higiénico y geometría que evite retenciones.</li><li>Rompebóvedas/vibrador si el polvo lo requiere.</li><li>No fijar volumen definitivo hasta disponer de consumos y densidades.</li><li>Candidato de referencia: GIMAT DOS.600 = 200 L; DOS.800 = 350 L.</li></ul>
+</div>
+<div class="tech-card-v11" id="z0-tech-2">
+ <div class="tech-head-v11"><span>2</span><h3>Células de carga / pesaje</h3></div>
+ <p>El depósito se apoya sobre células de carga y el PLC utiliza la variación de peso para conocer la cantidad descargada. GIMAT describe funcionamiento gravimétrico por pérdida de peso (Loss-in-Weight) y estaciones Big Bag montadas sobre células para descarga controlada. Es exactamente el principio que queremos aplicar a los depósitos de polvo de AURORA.</p>
+ <ul><li>Pesaje continuo de la masa del conjunto.</li><li>Dosificación por pérdida de peso.</li><li>Tara y capacidad de las células: pendientes de ingeniería.</li><li>PLC/HMI para recetas y parámetros de dosificación.</li><li>No confundir este pesaje con transmisores de nivel de los reactores.</li></ul>
+</div>
+<div class="tech-card-v11" id="z0-tech-3">
+ <div class="tech-head-v11"><span>3</span><h3>Dosificación gravimétrica</h3></div>
+ <p>La descarga del depósito se controla por tornillo/espiral o elemento equivalente mientras el PLC recibe el peso en tiempo real. GIMAT publica precisión gravimétrica típica ≤ ±2 %, condicionada al comportamiento del producto y al ajuste del sistema. En batch, el alimentador se detiene al alcanzar la cantidad programada.</p>
+ <ul><li>Modo previsto: batch por receta.</li><li>Tornillo/espiral seleccionado según fluidez y caudal.</li><li>Variador vectorial o motor brushless según precisión requerida.</li><li>Posible agitador de fondo para polvos cohesivos.</li><li>Caudal definitivo: pendiente de receta y tiempo de ciclo.</li></ul>
+</div>
+<div class="tech-card-v11" id="z0-tech-4">
+ <div class="tech-head-v11"><span>4</span><h3>Aspiración neumática por vacío</h3></div>
+ <p>Tras pesar/dosificar el ingrediente, el polvo se transporta por tubería cerrada mediante presión negativa. GIMAT indica que el vacío puede generarse mediante bomba de vacío o soplante en destino; el material se aspira desde los puntos de captación y se separa del aire en el punto de descarga. Esta es la arquitectura acordada para AURORA.</p>
+ <ul><li>Transporte cerrado de polvo.</li><li>Fuente de vacío común a estudiar, no una bomba por depósito.</li><li>Fase diluida o semidensa según ensayo del producto.</li><li>Velocidad y diámetro de tubería: pendientes de cálculo.</li><li>Materiales de contacto aptos para alimentación; revisar ATEX por polvo.</li></ul>
+</div>
+<div class="tech-card-v11" id="z0-tech-5">
+ <div class="tech-head-v11"><span>5</span><h3>Receptor / filtración</h3></div>
+ <p>En destino debe separarse el ingrediente de la corriente de aire antes de descargarlo. GIMAT emplea ciclón/filtro y sistemas de filtración desmontables y limpiables; en aplicaciones alimentarias declara materiales de contacto conformes con MOCA 1935/2004. La configuración final dependerá del polvo y del caudal de transporte.</p>
+ <ul><li>Receptor de vacío sobre el punto de descarga.</li><li>Filtro desmontable y limpiable.</li><li>Limpieza por aire comprimido inverso cuando proceda.</li><li>Recuperación del polvo evitando emisiones al ambiente.</li><li>Dimensionado de superficie filtrante pendiente del caudal de aire.</li></ul>
+</div>
+<div class="tech-card-v11" id="z0-tech-6">
+ <div class="tech-head-v11"><span>6</span><h3>Distribución automática hacia T-01 / T-02</h3></div>
+ <p>El ingrediente ya pesado se envía únicamente a la marmita seleccionada por receta. T-01 y T-02 son las dos marmitas de preparación del proyecto; no se añaden marmitas nuevas. El PLC debe confirmar origen y destino antes de habilitar el transporte. Las marmitas no tienen calentamiento: se usan para preparación/homogeneización antes del envío posterior a reactores.</p>
+ <ul><li>Dos destinos: T-01 o T-02.</li><li>Una sola ruta de destino habilitada cada vez.</li><li>Confirmación de válvulas antes de iniciar aspiración.</li><li>Parada segura si se pierde confirmación de ruta.</li><li>Tuberías y conexiones sanitarias, desmontables/limpiables.</li></ul>
+</div>
+ 
+<div class="supplier-v11">
+ <h3>Equipo de referencia que estamos estudiando · GIMAT</h3>
+ <p><b>Encaje:</b> tolva/depósito de polvo + pesaje por células + dosificación gravimétrica + conexión a transporte neumático por vacío.</p>
+ <div class="supplier-grid-v11">
+  <div><b>DOS.600</b><span>200 L · Ø600 mm</span></div>
+  <div><b>DOS.800</b><span>350 L · Ø800 mm</span></div>
+  <div><b>Precisión gravimétrica</b><span>típicamente ≤ ±2 % según producto/ajuste</span></div>
+  <div><b>Alimentario</b><span>opción 1935/2004 · AISI 304/316 según configuración</span></div>
+  <div><b>Automatización</b><span>PLC + HMI · recetas · batch/continuo</span></div>
+  <div><b>Precio</b><span>RFQ · GIMAT no publica precio del conjunto</span></div>
+ </div>
+ <p class="note-v11">Configuración AURORA a solicitar: depósito/tolva alimentaria sobre células de carga, dosificación por pérdida de peso y descarga preparada para aspiración neumática hacia T-01/T-02. Capacidad y caudal definitivos pendientes de receta y cálculo.</p>
+</div>
+
+</div>
+
+<div class="box"><h2>Flujo</h2><div class="flow">
+<div class="step">Tanques / tolvas de polvo</div><div class="arrow">→</div><div class="step">Pesaje integrado</div><div class="arrow">→</div><div class="step">Dosificación de receta</div><div class="arrow">→</div><div class="step">Transporte neumático</div><div class="arrow">→</div><div class="step">Selector T-01/T-02</div><div class="arrow">→</div><div class="step">Marmita</div><div class="arrow">→</div><div class="step">B-01</div><div class="arrow">→</div><div class="step">Reactor elegido</div>
+</div></div>
+<div class="box"><h2>Criterios técnicos ya definidos</h2><div class="facts"><div class="fact"><b>Alcance</b><span>Materias primas, pesaje, dosificación automática y preparación hacia dos marmitas T-01/T-02.</span></div><div class="fact"><b>Sólidos</b><span>Tolvas/silos con pesaje gravimétrico integrado. Tara, dosificación gruesa/fina, estabilización y validación de tolerancia.</span></div><div class="fact"><b>Vacío de transporte</b><span>Tolva de descarga de sacos + transporte por depresión + filtración/despolvoreo. Este vacío es independiente del vacío de proceso de reactores.</span></div><div class="fact"><b>Líquidos</b><span>Glucosa, agua, concentrados y otros líquidos por líneas dedicadas, medidos por báscula o caudalímetro adecuado.</span></div><div class="fact"><b>Destino</b><span>Únicamente T-01 o T-02; una ruta activa cada vez.</span></div><div class="fact"><b>Marmitas</b><span>T-01/T-02 bajas, atmosféricas, agitadas y SIN calentamiento.</span></div><div class="fact"><b>Transferencia a reactores</b><span>Configuración actual del proyecto: una bomba común B-01 y selección de R-101/R-201/R-202.</span></div><div class="fact"><b>Entrada a reactor</b><span>La alimentación procedente de las marmitas entra por conexión lateral aproximadamente a media altura del reactor, no por la descarga inferior.</span></div><div class="fact"><b>Trazabilidad</b><span>Registro de ingrediente, lote, peso objetivo, peso real, destino y alarmas.</span></div></div></div>
+<div class="box"><h2>Conjuntos a presupuestar</h2><div class="facts">
+<div class="fact"><b>0A-01 · Depósito/tolva con báscula integrada</b><span>Buscar equipo comercial completo, no fabricar pieza por pieza.</span></div>
+<div class="fact"><b>0A-02 · Dosificación gravimétrica</b><span>Integrada en el equipo cuando sea posible.</span></div>
+<div class="fact"><b>0A-03 · Microdosificación</b><span>Pectina y aditivos de baja dosificación.</span></div>
+<div class="fact"><b>0A-04 · Transporte neumático por vacío</b><span>Con filtración y despolvoreo.</span></div>
+<div class="fact"><b>0A-05 · Distribución automática T-01/T-02</b><span>Una sola ruta activa y confirmada.</span></div>
+<div class="fact"><b>0A-06 · Automatización receta</b><span>PLC/HMI, trazabilidad y registro real de pesos.</span></div>
+</div>
+<div class="toolbar">
+<button class="primary" onclick="alert('Aquí cargaremos los 5 proveedores reales de 0A-01.')">0A-01 · Añadir proveedores</button>
+<button class="secondary" onclick="openView('sources','Documentación base')">Ver fuentes</button>
+</div>
+</div>
+
+<div class="box">
+<h2>Memoria completa · Zona 0 Automatizada</h2>
+<p>Al entrar en esta alternativa se muestra directamente la memoria completa, página por página, con todas sus imágenes, esquemas, texto, seguridad y ejemplos de proceso.</p>
+<div class="pdfviewerbar">
+  <button class="primary" onclick="openFullPdf()">Abrir PDF completo</button>
+  <span class="small">12 páginas integradas</span>
+</div>
+<div class="pdfgallery">
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 1 de 12</div>
+          <img src="__AURORA_IMG_012__" alt="Página 1" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 2 de 12</div>
+          <img src="__AURORA_IMG_013__" alt="Página 2" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 3 de 12</div>
+          <img src="__AURORA_IMG_014__" alt="Página 3" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 4 de 12</div>
+          <img src="__AURORA_IMG_015__" alt="Página 4" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 5 de 12</div>
+          <img src="__AURORA_IMG_016__" alt="Página 5" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 6 de 12</div>
+          <img src="__AURORA_IMG_017__" alt="Página 6" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 7 de 12</div>
+          <img src="__AURORA_IMG_018__" alt="Página 7" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 8 de 12</div>
+          <img src="__AURORA_IMG_019__" alt="Página 8" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 9 de 12</div>
+          <img src="__AURORA_IMG_020__" alt="Página 9" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 10 de 12</div>
+          <img src="__AURORA_IMG_021__" alt="Página 10" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 11 de 12</div>
+          <img src="__AURORA_IMG_022__" alt="Página 11" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 12 de 12</div>
+          <img src="__AURORA_IMG_023__" alt="Página 12" onclick="openImage(this.src)">
+        </div>
+</div>
+</div>
+</section>
+
+
+<section id="z0semi" class="view hidden">
+<div class="hero">
+  <span class="tag">SEMIAUTOMATIZADA</span>
+  <h1>Marmitas automatizadas + envío a reactores</h1>
+  <p>En esta alternativa la preparación/carga de materias primas puede seguir siendo manual, pero las dos marmitas T-01/T-02 y la transferencia hacia el reactor seleccionado se integran en la automatización.</p>
+</div><div class="inner-map-wrap"><div class="inner-map-title">Alternativa 2 · Semiautomatizada · pulsa un número</div>
+<div class="inner-map-image"><img src="__AURORA_IMG_024__"><button class="inner-pin" style="left:8.0%;top:43%" onclick="showInnerInfo('z0semi',1)">1</button><button class="inner-pin" style="left:24.8%;top:59%" onclick="showInnerInfo('z0semi',2)">2</button><button class="inner-pin" style="left:41.6%;top:43%" onclick="showInnerInfo('z0semi',3)">3</button><button class="inner-pin" style="left:58.4%;top:59%" onclick="showInnerInfo('z0semi',4)">4</button><button class="inner-pin" style="left:75.2%;top:43%" onclick="showInnerInfo('z0semi',5)">5</button><button class="inner-pin" style="left:92.0%;top:59%" onclick="showInnerInfo('z0semi',6)">6</button></div>
+<div class="inner-legend"><div><b>0</b> Preparación manual</div><div><b>1</b> T-01</div><div><b>2</b> T-02</div><div><b>3</b> B-01 común</div><div><b>4</b> Selección reactor</div><div><b>5</b> Reactores</div></div><div><div id="z0semi-info-1" class="inner-info"><b>0 · Preparación manual</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0semi-info-2" class="inner-info"><b>1 · T-01</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0semi-info-3" class="inner-info"><b>2 · T-02</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0semi-info-4" class="inner-info"><b>3 · B-01 común</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0semi-info-5" class="inner-info"><b>4 · Selección reactor</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0semi-info-6" class="inner-info"><b>5 · Reactores</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div></div></div>
+
+<div class="box">
+<h2>Arquitectura semiautomática</h2>
+<div class="flow">
+  <div class="step">Pesaje / carga manual</div><div class="arrow">→</div>
+  <div class="step">T-01 o T-02</div><div class="arrow">→</div>
+  <div class="step">Agitación / homogeneización</div><div class="arrow">→</div>
+  <div class="step">Selección automática</div><div class="arrow">→</div>
+  <div class="step">B-01 común</div><div class="arrow">→</div>
+  <div class="step">R-101 / R-201 / R-202</div>
+</div>
+</div>
+
+<div class="box">
+<h2>Datos técnicos ya definidos</h2>
+<div class="facts">
+  <div class="fact"><b>Marmitas</b><span>T-01 y T-02, bajas, atmosféricas, con agitador, gran puerta superior y sin calentamiento.</span></div>
+  <div class="fact"><b>Transferencia</b><span>Las dos marmitas comparten B-01 para alimentar el reactor seleccionado.</span></div>
+  <div class="fact"><b>Selección de origen</b><span>Solo una marmita puede alimentar B-01 durante cada transferencia.</span></div>
+  <div class="fact"><b>Destino</b><span>R-101 (500 L), R-201 (200 L) o R-202 (200 L).</span></div>
+  <div class="fact"><b>Entrada a reactor</b><span>La premezcla entra por conexión lateral aproximadamente a media altura del reactor.</span></div>
+  <div class="fact"><b>Interlocks</b><span>B-01 solo arranca con origen y destino confirmados; pérdida de confirmación provoca parada.</span></div>
+  <div class="fact"><b>HMI</b><span>Selección de T-01/T-02, reactor destino, estados, alarmas, lotes y registro de transferencia.</span></div>
+  <div class="fact"><b>Higiene</b><span>Colector sanitario, drenante y limpiable/CIP.</span></div>
+</div>
+</div>
+
+<div class="box">
+<h2>Memoria completa · Marmitas + Reactores</h2>
+<p>Aquí tienes integrada la memoria completa de esta parte, con todas las imágenes, esquemas, proceso, seguridad, Brix, vacío y salida de reactores.</p>
+<div class="pdfviewerbar">
+  <button class="primary" onclick="openSemiPdf()">Abrir PDF completo</button>
+  <span class="small">13 páginas integradas</span>
+</div>
+<div class="pdfgallery">
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 1 de 13</div>
+          <img src="__AURORA_IMG_025__" alt="Página 1" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 2 de 13</div>
+          <img src="__AURORA_IMG_026__" alt="Página 2" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 3 de 13</div>
+          <img src="__AURORA_IMG_027__" alt="Página 3" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 4 de 13</div>
+          <img src="__AURORA_IMG_028__" alt="Página 4" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 5 de 13</div>
+          <img src="__AURORA_IMG_029__" alt="Página 5" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 6 de 13</div>
+          <img src="__AURORA_IMG_030__" alt="Página 6" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 7 de 13</div>
+          <img src="__AURORA_IMG_031__" alt="Página 7" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 8 de 13</div>
+          <img src="__AURORA_IMG_032__" alt="Página 8" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 9 de 13</div>
+          <img src="__AURORA_IMG_033__" alt="Página 9" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 10 de 13</div>
+          <img src="__AURORA_IMG_034__" alt="Página 10" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 11 de 13</div>
+          <img src="__AURORA_IMG_035__" alt="Página 11" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 12 de 13</div>
+          <img src="__AURORA_IMG_036__" alt="Página 12" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 13 de 13</div>
+          <img src="__AURORA_IMG_037__" alt="Página 13" onclick="openImage(this.src)">
+        </div>
+</div>
+</div>
+</section>
+
+
+
+<section id="z0manual" class="view hidden">
+<div class="hero">
+  <span class="tag">NO AUTOMATIZADA / BASE ACTUAL</span>
+  <h1>Reactores y proceso actual de gominolas</h1>
+  <p>Esta alternativa recoge la instalación de reactores y el proceso base existente, utilizando como documento principal la memoria técnica integral de AURORA CORP.</p>
+</div><div class="inner-map-wrap"><div class="inner-map-title">Alternativa 3 · Proceso actual · pulsa un número</div>
+<div class="inner-map-image"><img src="__AURORA_IMG_038__"><button class="inner-pin" style="left:8.0%;top:43%" onclick="showInnerInfo('z0manual',1)">1</button><button class="inner-pin" style="left:24.8%;top:59%" onclick="showInnerInfo('z0manual',2)">2</button><button class="inner-pin" style="left:41.6%;top:43%" onclick="showInnerInfo('z0manual',3)">3</button><button class="inner-pin" style="left:58.4%;top:59%" onclick="showInnerInfo('z0manual',4)">4</button><button class="inner-pin" style="left:75.2%;top:43%" onclick="showInnerInfo('z0manual',5)">5</button><button class="inner-pin" style="left:92.0%;top:59%" onclick="showInnerInfo('z0manual',6)">6</button></div>
+<div class="inner-legend"><div><b>0</b> R-101 · 500 L</div><div><b>1</b> R-201 · 200 L</div><div><b>2</b> R-202 · 200 L</div><div><b>3</b> Vacío proceso</div><div><b>4</b> TK-301 / tolva</div><div><b>5</b> Formado / túnel</div></div><div><div id="z0manual-info-1" class="inner-info"><b>0 · R-101 · 500 L</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0manual-info-2" class="inner-info"><b>1 · R-201 · 200 L</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0manual-info-3" class="inner-info"><b>2 · R-202 · 200 L</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0manual-info-4" class="inner-info"><b>3 · Vacío proceso</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0manual-info-5" class="inner-info"><b>4 · TK-301 / tolva</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div><div id="z0manual-info-6" class="inner-info"><b>5 · Formado / túnel</b><span>Aquí se desarrollarán equipos, proveedores, precios, documentación y presupuesto de este punto.</span></div></div></div>
+
+<div class="box">
+<h2>Resumen del proceso base</h2>
+<div class="flow">
+  <div class="step">Preparación manual / existente</div><div class="arrow">→</div>
+  <div class="step">R-101 / R-201 / R-202</div><div class="arrow">→</div>
+  <div class="step">Cocción + vacío + Brix</div><div class="arrow">→</div>
+  <div class="step">Bombas de reactor</div><div class="arrow">→</div>
+  <div class="step">XV-300</div><div class="arrow">→</div>
+  <div class="step">Directo o TK-301</div><div class="arrow">→</div>
+  <div class="step">Tolva / formadora</div>
+</div>
+</div>
+
+<div class="box">
+<h2>Datos principales</h2>
+<div class="facts">
+  <div class="fact"><b>Reactores</b><span>R-101 500 L; R-201 y R-202 200 L.</span></div>
+  <div class="fact"><b>Proceso</b><span>Agitación, calentamiento por vapor, vacío de proceso, control de Brix y enfriamiento por aire regulado en camisa.</span></div>
+  <div class="fact"><b>Brix</b><span>Medición continua BRX-101 / BRX-201 / BRX-202 en fondo/salida, antes de cada bomba.</span></div>
+  <div class="fact"><b>Nivel</b><span>No se consideran transmisores de nivel en los reactores ni en TK-301.</span></div>
+  <div class="fact"><b>Salida reactores</b><span>Válvula sanitaria → bomba lobular → EV automática con feedback → colector común.</span></div>
+  <div class="fact"><b>Destino</b><span>XV-300 selecciona producción directa o carga de TK-301.</span></div>
+  <div class="fact"><b>TK-301</b><span>500 L, sin vacío de proceso; descarga mediante V-301 → B-301 → EV-301.</span></div>
+  <div class="fact"><b>Control final</b><span>PT-401 → PIC-401 → PCV-401 → tolva/formadora.</span></div>
+  <div class="fact"><b>Vacío común</b><span>Reactores → válvulas individuales → C-101 → V-401 → VP-101.</span></div>
+  <div class="fact"><b>Calorifugado</b><span>Líneas calientes calorifugadas; tramos críticos susceptibles de encamisado con vapor.</span></div>
+</div>
+</div>
+
+<div class="box">
+<h2>Memoria técnica integral completa</h2>
+<p>He integrado la memoria grande completa. Puedes recorrerla página por página dentro de la aplicación, ampliar cualquier página y abrir el PDF entero.</p>
+<div class="pdfviewerbar">
+  <button class="primary" onclick="openManualPdf()">Abrir PDF completo</button>
+  <span class="small">63 páginas integradas</span>
+</div>
+<div class="pdfgallery">
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 1 de 63</div>
+          <img src="__AURORA_IMG_039__" alt="Página 1" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 2 de 63</div>
+          <img src="__AURORA_IMG_040__" alt="Página 2" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 3 de 63</div>
+          <img src="__AURORA_IMG_041__" alt="Página 3" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 4 de 63</div>
+          <img src="__AURORA_IMG_042__" alt="Página 4" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 5 de 63</div>
+          <img src="__AURORA_IMG_043__" alt="Página 5" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 6 de 63</div>
+          <img src="__AURORA_IMG_044__" alt="Página 6" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 7 de 63</div>
+          <img src="__AURORA_IMG_045__" alt="Página 7" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 8 de 63</div>
+          <img src="__AURORA_IMG_046__" alt="Página 8" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 9 de 63</div>
+          <img src="__AURORA_IMG_047__" alt="Página 9" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 10 de 63</div>
+          <img src="__AURORA_IMG_048__" alt="Página 10" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 11 de 63</div>
+          <img src="__AURORA_IMG_049__" alt="Página 11" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 12 de 63</div>
+          <img src="__AURORA_IMG_050__" alt="Página 12" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 13 de 63</div>
+          <img src="__AURORA_IMG_051__" alt="Página 13" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 14 de 63</div>
+          <img src="__AURORA_IMG_052__" alt="Página 14" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 15 de 63</div>
+          <img src="__AURORA_IMG_053__" alt="Página 15" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 16 de 63</div>
+          <img src="__AURORA_IMG_054__" alt="Página 16" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 17 de 63</div>
+          <img src="__AURORA_IMG_055__" alt="Página 17" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 18 de 63</div>
+          <img src="__AURORA_IMG_056__" alt="Página 18" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 19 de 63</div>
+          <img src="__AURORA_IMG_057__" alt="Página 19" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 20 de 63</div>
+          <img src="__AURORA_IMG_058__" alt="Página 20" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 21 de 63</div>
+          <img src="__AURORA_IMG_059__" alt="Página 21" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 22 de 63</div>
+          <img src="__AURORA_IMG_060__" alt="Página 22" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 23 de 63</div>
+          <img src="__AURORA_IMG_061__" alt="Página 23" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 24 de 63</div>
+          <img src="__AURORA_IMG_062__" alt="Página 24" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 25 de 63</div>
+          <img src="__AURORA_IMG_063__" alt="Página 25" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 26 de 63</div>
+          <img src="__AURORA_IMG_064__" alt="Página 26" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 27 de 63</div>
+          <img src="__AURORA_IMG_065__" alt="Página 27" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 28 de 63</div>
+          <img src="__AURORA_IMG_066__" alt="Página 28" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 29 de 63</div>
+          <img src="__AURORA_IMG_067__" alt="Página 29" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 30 de 63</div>
+          <img src="__AURORA_IMG_068__" alt="Página 30" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 31 de 63</div>
+          <img src="__AURORA_IMG_069__" alt="Página 31" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 32 de 63</div>
+          <img src="__AURORA_IMG_070__" alt="Página 32" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 33 de 63</div>
+          <img src="__AURORA_IMG_071__" alt="Página 33" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 34 de 63</div>
+          <img src="__AURORA_IMG_072__" alt="Página 34" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 35 de 63</div>
+          <img src="__AURORA_IMG_073__" alt="Página 35" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 36 de 63</div>
+          <img src="__AURORA_IMG_074__" alt="Página 36" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 37 de 63</div>
+          <img src="__AURORA_IMG_075__" alt="Página 37" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 38 de 63</div>
+          <img src="__AURORA_IMG_076__" alt="Página 38" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 39 de 63</div>
+          <img src="__AURORA_IMG_077__" alt="Página 39" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 40 de 63</div>
+          <img src="__AURORA_IMG_078__" alt="Página 40" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 41 de 63</div>
+          <img src="__AURORA_IMG_079__" alt="Página 41" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 42 de 63</div>
+          <img src="__AURORA_IMG_080__" alt="Página 42" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 43 de 63</div>
+          <img src="__AURORA_IMG_081__" alt="Página 43" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 44 de 63</div>
+          <img src="__AURORA_IMG_082__" alt="Página 44" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 45 de 63</div>
+          <img src="__AURORA_IMG_083__" alt="Página 45" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 46 de 63</div>
+          <img src="__AURORA_IMG_084__" alt="Página 46" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 47 de 63</div>
+          <img src="__AURORA_IMG_085__" alt="Página 47" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 48 de 63</div>
+          <img src="__AURORA_IMG_086__" alt="Página 48" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 49 de 63</div>
+          <img src="__AURORA_IMG_087__" alt="Página 49" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 50 de 63</div>
+          <img src="__AURORA_IMG_088__" alt="Página 50" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 51 de 63</div>
+          <img src="__AURORA_IMG_089__" alt="Página 51" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 52 de 63</div>
+          <img src="__AURORA_IMG_090__" alt="Página 52" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 53 de 63</div>
+          <img src="__AURORA_IMG_091__" alt="Página 53" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 54 de 63</div>
+          <img src="__AURORA_IMG_092__" alt="Página 54" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 55 de 63</div>
+          <img src="__AURORA_IMG_093__" alt="Página 55" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 56 de 63</div>
+          <img src="__AURORA_IMG_094__" alt="Página 56" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 57 de 63</div>
+          <img src="__AURORA_IMG_095__" alt="Página 57" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 58 de 63</div>
+          <img src="__AURORA_IMG_096__" alt="Página 58" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 59 de 63</div>
+          <img src="__AURORA_IMG_097__" alt="Página 59" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 60 de 63</div>
+          <img src="__AURORA_IMG_098__" alt="Página 60" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 61 de 63</div>
+          <img src="__AURORA_IMG_099__" alt="Página 61" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 62 de 63</div>
+          <img src="__AURORA_IMG_100__" alt="Página 62" onclick="openImage(this.src)">
+        </div>
+<div class="pdfpage">
+          <div class="pdfpagetitle">Página 63 de 63</div>
+          <img src="__AURORA_IMG_101__" alt="Página 63" onclick="openImage(this.src)">
+        </div>
+</div>
+</div>
+</section>
+
+
+
+
+<section id="zone1" class="view hidden visual-zone-v10">
+ <div class="hero"><span class="tag">ZONA 1</span><h1>Marmitas y reactores</h1>
+ <p>Vista visual de la zona. Pulsa un número sobre la imagen para identificar y abrir cada parte.</p></div>
+ <div class="inner-map-wrap">
+  <div class="inner-map-title">ZONA 1 · Marmitas y reactores</div>
+  <div class="inner-map-image v10-photo"><img src="__AURORA_IMG_102__" alt="Marmitas y reactores"><button class="inner-pin v14pin" style="left:17%;top:50%" onclick="showZoneInfo(1,1)">1</button><button class="inner-pin v14pin" style="left:50%;top:50%" onclick="showZoneInfo(1,2)">2</button><button class="inner-pin v14pin" style="left:83%;top:50%" onclick="showZoneInfo(1,3)">3</button></div>
+  <div class="inner-legend v14legend"><div><b>1</b> Marmitas T-01 / T-02</div><div><b>2</b> B-01 · transferencia común</div><div><b>3</b> Reactores R-101 / R-201 / R-202</div></div><div><div id="zone1-info-1" class="inner-info"><b>1 · Marmitas T-01 / T-02</b><span>Preparación e homogeneización sin calentamiento. Selección exclusiva de origen hacia B-01.</span></div><div id="zone1-info-2" class="inner-info"><b>2 · B-01 · transferencia común</b><span>Una bomba común para T-01/T-02; origen y reactor de destino deben estar confirmados antes de arrancar.</span></div><div id="zone1-info-3" class="inner-info"><b>3 · Reactores R-101 / R-201 / R-202</b><span>500 L + 200 L + 200 L; vapor, vacío, temperaturas, Brix en fondo, aditivos superiores y transferencia automática.</span></div></div></div>
+  <div><div id="zone1-info-1" class="inner-info"><b>1 · T-01</b><span>T-01 dentro de Marmitas y reactores. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone1-info-2" class="inner-info"><b>2 · T-02</b><span>T-02 dentro de Marmitas y reactores. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone1-info-3" class="inner-info"><b>3 · B-01 común</b><span>B-01 común dentro de Marmitas y reactores. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone1-info-4" class="inner-info"><b>4 · R-101 · 500 L</b><span>R-101 · 500 L dentro de Marmitas y reactores. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone1-info-5" class="inner-info"><b>5 · R-201 · 200 L</b><span>R-201 · 200 L dentro de Marmitas y reactores. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div><div id="zone1-info-6" class="inner-info"><b>6 · R-202 · 200 L</b><span>R-202 · 200 L dentro de Marmitas y reactores. Aquí iremos incorporando detalle técnico, equipos, documentación, proveedores, precios y presupuesto.</span></div></div>
+ </div>
+</section>
+
+<div class="super-memory all-zones-super">
+<h2>Qué es, para qué sirve y cómo funciona · Zona 1</h2>
+<p class="super-lead">Este capítulo explica el propósito real de cada conjunto, qué hace físicamente, cómo interviene en el proceso, qué controla el PLC, con qué equipos se relaciona y qué ocurre si una condición no se cumple.</p>
+<article class="super-card"><h3>1 · T-01 y T-02 · marmitas de preparación</h3><p><b>Qué Son.</b> Son dos recipientes sanitarios bajos de preparación y homogeneización. No son reactores de cocción: no llevan calentamiento, vapor ni vacío de proceso.</p><p><b>Para Qué Sirven.</b> Reciben los ingredientes preparados para formar una premezcla homogénea antes de enviarla al reactor que realizará la fase térmica. Su geometría baja facilita carga y trabajo del operario.</p><p><b>Qué Hacen.</b> El agitador mezcla el contenido hasta alcanzar la homogeneidad definida por procedimiento. Cuando la preparación está terminada, la marmita pasa a estado DISPONIBLE PARA TRANSFERENCIA.</p><p><b>Cómo Se Transfiere.</b> T-01 y T-02 comparten B-01. El PLC selecciona un único origen, cierra/bloquea el otro, selecciona R-101/R-201/R-202 y comprueba la ruta. Solo entonces arranca B-01.</p><p><b>Por Qué Es Importante.</b> Evita conexiones improvisadas y errores de destino. La HMI debe indicar claramente marmita seleccionada, reactor destino, válvulas confirmadas, bomba y causa de cualquier bloqueo.</p></article><article class="super-card"><h3>2 · B-01 · bomba común de marmitas a reactores</h3><p><b>Qué Es.</b> Es la bomba sanitaria común que mueve la premezcla desde cualquiera de las dos marmitas hacia cualquiera de los tres reactores.</p><p><b>Para Qué Sirve.</b> Sustituye la necesidad de una bomba independiente por marmita y permite una arquitectura común con selección automática de origen/destino.</p><p><b>Cómo Funciona.</b> Origen confirmado → destino confirmado → línea disponible → orden de marcha. La premezcla entra al reactor lateralmente aproximadamente a media altura.</p><p><b>Qué Debe Evitar.</b> Nunca debe arrancar con descarga cerrada o ruta ambigua. Si es una bomba de desplazamiento positivo, el diseño debe contemplar protección frente a dead-head/sobrepresión.</p><p><b>Qué Controla El Plc.</b> Orden de marcha, confirmación de válvulas, tiempo de transferencia, fallo eléctrico, disponibilidad de destino y parada inmediata/controlada si desaparece una permisiva.</p></article><article class="super-card"><h3>3 · R-101 / R-201 / R-202 · reactores</h3><p><b>Qué Son.</b> R-101 es el reactor de 500 L y R-201/R-202 son los reactores de 200 L. Son los equipos donde se realiza la fase principal de proceso: mezcla, calentamiento, concentración mediante vacío, control de °Brix, adición final y homogeneización.</p><p><b>Para Qué Sirven.</b> Transforman la premezcla en el producto con las condiciones de concentración, temperatura y homogeneidad necesarias antes de alimentar el proceso de formado.</p><p><b>Qué Instrumentación Tienen.</b> Cada reactor dispone de PT/PI, temperatura de producto, temperatura de camisa y refractómetro continuo BRX-101/201/202 situado en la zona inferior/salida antes de su bomba. No se incorpora transmisor de nivel.</p><p><b>Cómo Se Calientan Y Enfrían.</b> La camisa recibe vapor durante calentamiento. Para el enfriamiento rápido existe una entrada independiente de aire comprimido regulado a camisa. La secuencia impide una transición insegura: primero se cierra/confirma vapor, se estabiliza/drena y después se habilita aire.</p><p><b>Cómo Trabajan Con Vacío.</b> La válvula individual conecta únicamente el reactor seleccionado al colector común de vacío. C-101 condensa vapor, V-401 separa líquido y VP-101 genera la depresión.</p><p><b>Cómo Salen.</b> R-101→V-101→B-101→EV-101; R-201→V-201→B-201→EV-201; R-202→V-202→B-202→EV-202. Solo una rama debe impulsar al colector; las otras EV quedan cerradas.</p><p><b>Aditivos Finales.</b> Cada reactor dispone de un pequeño depósito superior de aproximadamente 5 L. Se carga con válvula inferior cerrada, se cierra la tapa, se presuriza la junta inflable y, cuando PLC confirma cierre/sellado y condición compatible de presión/vacío, se abre la válvula inferior y el aditivo cae verticalmente al reactor.</p></article></div><section id="zone2" class="view hidden visual-zone-v10">
+ <div class="hero"><span class="tag">ZONA 2</span><h1>Vacío · TK-301 · Tolva</h1>
+ <p>Vista visual de la zona. Pulsa un número sobre la imagen para identificar y abrir cada parte.</p></div>
+ <div class="inner-map-wrap">
+  <div class="inner-map-title">ZONA 2 · Vacío · TK-301 · Tolva</div>
+  <div class="inner-map-image v10-photo"><img src="__AURORA_IMG_103__" alt="Vacío · TK-301 · Tolva"><button class="inner-pin" style="left:9.0%;top:44%" onclick="showZoneInfo(2,1)">1</button><button class="inner-pin" style="left:25.4%;top:60%" onclick="showZoneInfo(2,2)">2</button><button class="inner-pin" style="left:41.8%;top:44%" onclick="showZoneInfo(2,3)">3</button><button class="inner-pin" style="left:58.2%;top:60%" onclick="showZoneInfo(2,4)">4</button><button class="inner-pin" style="left:74.6%;top:44%" onclick="showZoneInfo(2,5)">5</button><button class="inner-pin" style="left:91.0%;top:60%" onclick="showZoneInfo(2,6)">6</button></div>
+  <div class="inner-legend"><div><b>1</b> Sistema completo de vacío · conjunto</div><div><b>2</b> VP-101 · bomba de vacío</div><div><b>3</b> C-101 · condensador de vacío</div><div><b>4</b> TK-301 · tanque pulmón 500 L</div><div><b>5</b> V-401 · separador de condensados</div><div><b>6</b> B-301 + EV-301 · salida TK-301</div></div>
+  <div>
+<div id="zone2-info-1" class="inner-info"><b>1 · Sistema completo de vacío</b><span>Vista conjunta del circuito exclusivo de los tres reactores: R-101/R-201/R-202 → válvula de vacío individual → colector común → C-101 → V-401 → VP-101 → descarga. Solo una rama de reactor puede quedar habilitada por secuencia. TK-301 no pertenece al vacío de proceso.</span></div>
+<div id="zone2-info-2" class="inner-info"><b>2 · VP-101 · Bomba de vacío</b><span>Equipo generador del vacío común. Trabaja protegido por C-101 y V-401. Fallo de bomba, temperatura excesiva aguas arriba o arrastre de líquido deben provocar alarma, aislamiento de la rama activa y bloqueo de la fase de vacío.</span></div>
+<div id="zone2-info-3" class="inner-info"><b>3 · C-101 · Condensador</b><span>Condensa la mayor parte del vapor extraído del reactor antes de llegar a VP-101. Está asociado al módulo frigorífico. La temperatura de salida y el estado del frío forman parte de las permisivas de funcionamiento del vacío.</span></div>
+<div id="zone2-info-4" class="inner-info"><b>4 · TK-301 · 500 L</b><span>Tanque pulmón de 500 L para desacoplar la cocción de la demanda de la formadora. Recibe producto desde XV-300. No trabaja con vacío de proceso y no lleva transmisor de nivel. Dispone de PT/PI, venteo/alivio y protección anti-vacío accidental.</span></div>
+<div id="zone2-info-5" class="inner-info"><b>5 · V-401 · Separador</b><span>Separador de condensados situado después de C-101. Retiene gotas y líquido antes de VP-101. Su condensado se dirige exclusivamente a drenaje; no retorna a producto. La purga debe evitar pérdida incontrolada de vacío y arrastre hacia la bomba.</span></div>
+<div id="zone2-info-6" class="inner-info"><b>6 · B-301 + EV-301</b><span>Salida inferior de TK-301: V-301 → B-301 → EV-301. La bomba solo arranca con ruta aguas abajo confirmada. Su descarga se une a la ruta directa antes del lazo PT-401 → PIC-401 → PCV-401 que alimenta la tolva/formadora.</span></div>
+</div>
+</div>
+<div class="super-memory all-zones-super">
+<h2>Qué es, para qué sirve y cómo funciona · Zona 2</h2>
+<p class="super-lead">Este capítulo explica el propósito real de cada conjunto, qué hace físicamente, cómo interviene en el proceso, qué controla el PLC, con qué equipos se relaciona y qué ocurre si una condición no se cumple.</p>
+<article class="super-card"><h3>1 · Circuito de vacío completo</h3><p><b>Qué Es.</b> Es el sistema común que permite trabajar al vacío a R-101, R-201 o R-202. Está formado por las válvulas individuales de reactor, colector, C-101, V-401 y VP-101.</p><p><b>Para Qué Sirve.</b> Reducir la presión del reactor favorece la evaporación/concentración a las condiciones de proceso requeridas. El sistema además debe impedir que grandes cantidades de vapor o líquido alcancen la bomba de vacío.</p><p><b>Cómo Funciona.</b> El PLC cierra las ramas no seleccionadas, confirma estados, abre la válvula del reactor activo, comprueba frío/separación y habilita VP-101. Solo un reactor queda conectado.</p><p><b>Qué Pasa Si Falla.</b> Fallo de bomba, temperatura excesiva tras C-101, arrastre de líquido o discrepancia de válvula cancela/limita vacío y aísla la rama. La protección mecánica de vacío del reactor no depende exclusivamente del PLC.</p></article><article class="super-card"><h3>2 · C-101 + V-401 + VP-101</h3><p>C-101. Es el condensador/cold trap. Su trabajo es retirar calor al vapor extraído para convertir la mayor parte en condensado antes de la bomba. El módulo frigorífico asociado debe estar disponible antes de exigir vacío.</p><p>V-401. Es el separador de condensados. Recoge las gotas/líquido que aún quedan después de C-101. Ese condensado va a drenaje y nunca retorna a producto.</p><p>VP-101. Es la bomba que genera el vacío. Debe recibir un gas suficientemente acondicionado por C-101/V-401. No se dimensionará por intuición: caudal y vacío final dependen de carga real de vapor y condiciones de proceso.</p><p><b>Control Conjunto.</b> Temperatura alta después de condensación o evidencia de líquido protege VP-101 mediante alarma e inhibición/limitación del vacío.</p></article><article class="super-card"><h3>3 · TK-301 + B-301 + regulación final</h3><p>TK-301. Tanque pulmón de 500 L. Su misión es desacoplar el ritmo de los reactores del consumo de la formadora. XV-300 decide si el producto va DIRECTO o al pulmón. TK-301 no trabaja con vacío de proceso y no lleva transmisor de nivel.</p><p><b>Salida.</b> TK-301→V-301→B-301→EV-301. B-301 no arranca hasta tener la descarga disponible y EV-301 confirmada. Una pérdida de confirmación detiene la bomba.</p><p><b>Unión Final.</b> La descarga de B-301 se une a la ruta directa antes de PT-401→PIC-401→PCV-401. PT mide, PIC calcula la corrección y PCV modula para mantener una alimentación estable.</p><p><b>Tolva.</b> La tolva final sí dispone de LSL-HOP/LSH-HOP. Bajo nivel solicita alimentación; alto nivel retira demanda. Una parada de formadora también retira demanda para que ninguna bomba continúe enviando producto sin consumo.</p></article></div><section id="inventory" class="view hidden">
+<div class="hero"><span class="tag">EXCEL IMPORTADO</span><h1>Maquinaria existente · Zona de Gominolas</h1><p>Datos cargados de <b>RELACION MAQUINARIA_REGISTRO INFORMACION_16_03_26.xlsx</b>. No se sustituyen por la ingeniería nueva: sirven para distinguir existente / nuevo / a modificar.</p></div>
+<div class="box"><div class="tablewrap"><table id="invTable"><thead><tr><th>Equipo</th><th>Código</th><th>Prioridad</th><th>CE</th><th>RD 1215</th><th>Observaciones</th></tr></thead><tbody></tbody></table></div></div>
+</section>
+
+
+<section id="sources" class="view hidden">
+<div class="hero">
+  <span class="tag">CENTRO DOCUMENTAL</span>
+  <h1>Documentación técnica incorporada</h1>
+  <p>Memorias, instrucciones de trabajo, alternativas históricas y documentación UHT relacionada. Las revisiones vigentes mandan sobre documentos históricos cuando exista discrepancia.</p>
+</div>
+<div class="box">
+  <div class="source-note"><b>Criterio de uso:</b> Zona 0, Zona 1 y Memoria Integral AURORA CORP v8 se toman como base del proyecto actual. Las IT del reactor 500 L se usan como referencia operativa. La alternativa P-02 y la versión XM v5 se conservan para comparación/histórico. El bloque UHT queda separado del presupuesto de gominolas salvo que decidamos integrarlo después.</div>
+  <div class="docxgrid">
+    <div class="docxcard">
+      <img src="__AURORA_IMG_104__" alt="">
+      <div class="docbody">
+        <div class="docbadges"><span class="badge ok">VIGENTE</span><span class="badge">Gominolas · Vigente</span></div>
+        <h3>Zona 1 - Marmitas + Reactores</h3>
+        <p>2 marmitas T-01/T-02, B-01 común, R-101 500 L, R-201/R-202 200 L, cocción, vacío, Brix, seguridad y salida hacia XV-300.</p>
+        <div class="docmeta">13 páginas · MEMORIA_ZONA_1_MARMITAS_REACTORES_AURORA_CORP_COMPLETA(1).pdf</div>
+      </div>
+    </div>
+    
